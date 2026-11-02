@@ -1,0 +1,3520 @@
+{
+ "source": {
+  "private_rows": 12284,
+  "private_pages": 33,
+  "private_titles": 10849,
+  "private_mention_rows": 3723,
+  "local_pages": 185,
+  "local_pages_total": 187,
+  "local_rows": 483,
+  "local_missing": "1802 to 1803 and 1841",
+  "kinds_private": {
+   "enclosure": 3614,
+   "other": 14,
+   "agreement": 51,
+   "amendment": 43
+  },
+  "kinds_local": {
+   "enclosure": 449,
+   "other": 3,
+   "amendment": 2,
+   "order": 29
+  },
+  "ireland": 10,
+  "n_private": 3655,
+  "n_local": 449,
+  "n_all": 4104,
+  "n_private_mentions": 3722,
+  "n_local_mentions": 483,
+  "amend_private": 43,
+  "agree_private": 51,
+  "orders_local": 29,
+  "other_private": 14,
+  "allotment_only": 68,
+  "first_year": 1562,
+  "last_year": 1873
+ },
+ "geo": {
+  "private": {
+   "places": 4750,
+   "matched": 3853,
+   "rate": 81.12,
+   "acts_located": 3125,
+   "acts_rate": 85.5
+  },
+  "local": {
+   "places": 625,
+   "matched": 406,
+   "rate": 64.96,
+   "acts_located": 306,
+   "acts_rate": 68.15
+  },
+  "places": 5375,
+  "matched": 4259,
+  "rate": 79.24,
+  "acts_located": 3431,
+  "acts_rate": 83.6,
+  "how": {
+   "exact": 3475,
+   "none": 906,
+   "close": 442,
+   "part": 234,
+   "ambiguous": 210,
+   "neighbour": 90,
+   "other county": 18
+  },
+  "unique_places": 3964,
+  "gaz_ew": 28035,
+  "gaz_items": 31432,
+  "wales_rate": 57.22,
+  "england_rate": 82.69
+ },
+ "years": [
+  {
+   "y": 1700,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1701,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1702,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1703,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1704,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1705,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1706,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1707,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1708,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1709,
+   "private": 1,
+   "local": 0,
+   "n": 1
+  },
+  {
+   "y": 1710,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1711,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1712,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1713,
+   "private": 1,
+   "local": 0,
+   "n": 1
+  },
+  {
+   "y": 1714,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1715,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1716,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1717,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1718,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1719,
+   "private": 2,
+   "local": 0,
+   "n": 2
+  },
+  {
+   "y": 1720,
+   "private": 3,
+   "local": 0,
+   "n": 3
+  },
+  {
+   "y": 1721,
+   "private": 1,
+   "local": 0,
+   "n": 1
+  },
+  {
+   "y": 1722,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1723,
+   "private": 2,
+   "local": 0,
+   "n": 2
+  },
+  {
+   "y": 1724,
+   "private": 3,
+   "local": 0,
+   "n": 3
+  },
+  {
+   "y": 1725,
+   "private": 3,
+   "local": 0,
+   "n": 3
+  },
+  {
+   "y": 1726,
+   "private": 3,
+   "local": 0,
+   "n": 3
+  },
+  {
+   "y": 1727,
+   "private": 4,
+   "local": 0,
+   "n": 4
+  },
+  {
+   "y": 1728,
+   "private": 5,
+   "local": 0,
+   "n": 5
+  },
+  {
+   "y": 1729,
+   "private": 6,
+   "local": 0,
+   "n": 6
+  },
+  {
+   "y": 1730,
+   "private": 6,
+   "local": 0,
+   "n": 6
+  },
+  {
+   "y": 1731,
+   "private": 3,
+   "local": 0,
+   "n": 3
+  },
+  {
+   "y": 1732,
+   "private": 6,
+   "local": 0,
+   "n": 6
+  },
+  {
+   "y": 1733,
+   "private": 3,
+   "local": 0,
+   "n": 3
+  },
+  {
+   "y": 1734,
+   "private": 2,
+   "local": 0,
+   "n": 2
+  },
+  {
+   "y": 1735,
+   "private": 4,
+   "local": 0,
+   "n": 4
+  },
+  {
+   "y": 1736,
+   "private": 2,
+   "local": 0,
+   "n": 2
+  },
+  {
+   "y": 1737,
+   "private": 3,
+   "local": 0,
+   "n": 3
+  },
+  {
+   "y": 1738,
+   "private": 4,
+   "local": 0,
+   "n": 4
+  },
+  {
+   "y": 1739,
+   "private": 6,
+   "local": 0,
+   "n": 6
+  },
+  {
+   "y": 1740,
+   "private": 4,
+   "local": 0,
+   "n": 4
+  },
+  {
+   "y": 1741,
+   "private": 3,
+   "local": 0,
+   "n": 3
+  },
+  {
+   "y": 1742,
+   "private": 5,
+   "local": 0,
+   "n": 5
+  },
+  {
+   "y": 1743,
+   "private": 6,
+   "local": 0,
+   "n": 6
+  },
+  {
+   "y": 1744,
+   "private": 1,
+   "local": 0,
+   "n": 1
+  },
+  {
+   "y": 1745,
+   "private": 2,
+   "local": 0,
+   "n": 2
+  },
+  {
+   "y": 1746,
+   "private": 1,
+   "local": 0,
+   "n": 1
+  },
+  {
+   "y": 1747,
+   "private": 5,
+   "local": 0,
+   "n": 5
+  },
+  {
+   "y": 1748,
+   "private": 5,
+   "local": 0,
+   "n": 5
+  },
+  {
+   "y": 1749,
+   "private": 2,
+   "local": 0,
+   "n": 2
+  },
+  {
+   "y": 1750,
+   "private": 5,
+   "local": 0,
+   "n": 5
+  },
+  {
+   "y": 1751,
+   "private": 5,
+   "local": 0,
+   "n": 5
+  },
+  {
+   "y": 1752,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1753,
+   "private": 8,
+   "local": 0,
+   "n": 8
+  },
+  {
+   "y": 1754,
+   "private": 4,
+   "local": 0,
+   "n": 4
+  },
+  {
+   "y": 1755,
+   "private": 15,
+   "local": 0,
+   "n": 15
+  },
+  {
+   "y": 1756,
+   "private": 11,
+   "local": 0,
+   "n": 11
+  },
+  {
+   "y": 1757,
+   "private": 38,
+   "local": 0,
+   "n": 38
+  },
+  {
+   "y": 1758,
+   "private": 27,
+   "local": 0,
+   "n": 27
+  },
+  {
+   "y": 1759,
+   "private": 34,
+   "local": 0,
+   "n": 34
+  },
+  {
+   "y": 1760,
+   "private": 21,
+   "local": 0,
+   "n": 21
+  },
+  {
+   "y": 1761,
+   "private": 1,
+   "local": 0,
+   "n": 1
+  },
+  {
+   "y": 1762,
+   "private": 20,
+   "local": 0,
+   "n": 20
+  },
+  {
+   "y": 1763,
+   "private": 18,
+   "local": 0,
+   "n": 18
+  },
+  {
+   "y": 1764,
+   "private": 37,
+   "local": 0,
+   "n": 37
+  },
+  {
+   "y": 1765,
+   "private": 62,
+   "local": 0,
+   "n": 62
+  },
+  {
+   "y": 1766,
+   "private": 67,
+   "local": 0,
+   "n": 67
+  },
+  {
+   "y": 1767,
+   "private": 38,
+   "local": 0,
+   "n": 38
+  },
+  {
+   "y": 1768,
+   "private": 33,
+   "local": 0,
+   "n": 33
+  },
+  {
+   "y": 1769,
+   "private": 62,
+   "local": 0,
+   "n": 62
+  },
+  {
+   "y": 1770,
+   "private": 52,
+   "local": 0,
+   "n": 52
+  },
+  {
+   "y": 1771,
+   "private": 67,
+   "local": 0,
+   "n": 67
+  },
+  {
+   "y": 1772,
+   "private": 72,
+   "local": 0,
+   "n": 72
+  },
+  {
+   "y": 1773,
+   "private": 63,
+   "local": 0,
+   "n": 63
+  },
+  {
+   "y": 1774,
+   "private": 60,
+   "local": 0,
+   "n": 60
+  },
+  {
+   "y": 1775,
+   "private": 41,
+   "local": 0,
+   "n": 41
+  },
+  {
+   "y": 1776,
+   "private": 56,
+   "local": 0,
+   "n": 56
+  },
+  {
+   "y": 1777,
+   "private": 87,
+   "local": 0,
+   "n": 87
+  },
+  {
+   "y": 1778,
+   "private": 61,
+   "local": 0,
+   "n": 61
+  },
+  {
+   "y": 1779,
+   "private": 67,
+   "local": 0,
+   "n": 67
+  },
+  {
+   "y": 1780,
+   "private": 34,
+   "local": 0,
+   "n": 34
+  },
+  {
+   "y": 1781,
+   "private": 22,
+   "local": 0,
+   "n": 22
+  },
+  {
+   "y": 1782,
+   "private": 14,
+   "local": 0,
+   "n": 14
+  },
+  {
+   "y": 1783,
+   "private": 18,
+   "local": 0,
+   "n": 18
+  },
+  {
+   "y": 1784,
+   "private": 11,
+   "local": 0,
+   "n": 11
+  },
+  {
+   "y": 1785,
+   "private": 22,
+   "local": 0,
+   "n": 22
+  },
+  {
+   "y": 1786,
+   "private": 23,
+   "local": 0,
+   "n": 23
+  },
+  {
+   "y": 1787,
+   "private": 21,
+   "local": 0,
+   "n": 21
+  },
+  {
+   "y": 1788,
+   "private": 33,
+   "local": 0,
+   "n": 33
+  },
+  {
+   "y": 1789,
+   "private": 31,
+   "local": 0,
+   "n": 31
+  },
+  {
+   "y": 1790,
+   "private": 22,
+   "local": 0,
+   "n": 22
+  },
+  {
+   "y": 1791,
+   "private": 35,
+   "local": 0,
+   "n": 35
+  },
+  {
+   "y": 1792,
+   "private": 33,
+   "local": 0,
+   "n": 33
+  },
+  {
+   "y": 1793,
+   "private": 58,
+   "local": 0,
+   "n": 58
+  },
+  {
+   "y": 1794,
+   "private": 72,
+   "local": 0,
+   "n": 72
+  },
+  {
+   "y": 1795,
+   "private": 75,
+   "local": 0,
+   "n": 75
+  },
+  {
+   "y": 1796,
+   "private": 67,
+   "local": 0,
+   "n": 67
+  },
+  {
+   "y": 1797,
+   "private": 81,
+   "local": 0,
+   "n": 81
+  },
+  {
+   "y": 1798,
+   "private": 49,
+   "local": 0,
+   "n": 49
+  },
+  {
+   "y": 1799,
+   "private": 63,
+   "local": 2,
+   "n": 65
+  },
+  {
+   "y": 1800,
+   "private": 74,
+   "local": 9,
+   "n": 83
+  },
+  {
+   "y": 1801,
+   "private": 100,
+   "local": 17,
+   "n": 117
+  },
+  {
+   "y": 1802,
+   "private": 81,
+   "local": 0,
+   "n": 81
+  },
+  {
+   "y": 1803,
+   "private": 74,
+   "local": 0,
+   "n": 74
+  },
+  {
+   "y": 1804,
+   "private": 47,
+   "local": 6,
+   "n": 53
+  },
+  {
+   "y": 1805,
+   "private": 56,
+   "local": 13,
+   "n": 69
+  },
+  {
+   "y": 1806,
+   "private": 58,
+   "local": 17,
+   "n": 75
+  },
+  {
+   "y": 1807,
+   "private": 67,
+   "local": 23,
+   "n": 90
+  },
+  {
+   "y": 1808,
+   "private": 62,
+   "local": 25,
+   "n": 87
+  },
+  {
+   "y": 1809,
+   "private": 80,
+   "local": 41,
+   "n": 121
+  },
+  {
+   "y": 1810,
+   "private": 70,
+   "local": 32,
+   "n": 102
+  },
+  {
+   "y": 1811,
+   "private": 61,
+   "local": 64,
+   "n": 125
+  },
+  {
+   "y": 1812,
+   "private": 63,
+   "local": 53,
+   "n": 116
+  },
+  {
+   "y": 1813,
+   "private": 60,
+   "local": 54,
+   "n": 114
+  },
+  {
+   "y": 1814,
+   "private": 46,
+   "local": 68,
+   "n": 114
+  },
+  {
+   "y": 1815,
+   "private": 77,
+   "local": 2,
+   "n": 79
+  },
+  {
+   "y": 1816,
+   "private": 42,
+   "local": 1,
+   "n": 43
+  },
+  {
+   "y": 1817,
+   "private": 28,
+   "local": 1,
+   "n": 29
+  },
+  {
+   "y": 1818,
+   "private": 36,
+   "local": 3,
+   "n": 39
+  },
+  {
+   "y": 1819,
+   "private": 41,
+   "local": 1,
+   "n": 42
+  },
+  {
+   "y": 1820,
+   "private": 34,
+   "local": 0,
+   "n": 34
+  },
+  {
+   "y": 1821,
+   "private": 28,
+   "local": 2,
+   "n": 30
+  },
+  {
+   "y": 1822,
+   "private": 14,
+   "local": 0,
+   "n": 14
+  },
+  {
+   "y": 1823,
+   "private": 11,
+   "local": 0,
+   "n": 11
+  },
+  {
+   "y": 1824,
+   "private": 17,
+   "local": 1,
+   "n": 18
+  },
+  {
+   "y": 1825,
+   "private": 20,
+   "local": 2,
+   "n": 22
+  },
+  {
+   "y": 1826,
+   "private": 19,
+   "local": 0,
+   "n": 19
+  },
+  {
+   "y": 1827,
+   "private": 20,
+   "local": 1,
+   "n": 21
+  },
+  {
+   "y": 1828,
+   "private": 15,
+   "local": 0,
+   "n": 15
+  },
+  {
+   "y": 1829,
+   "private": 22,
+   "local": 1,
+   "n": 23
+  },
+  {
+   "y": 1830,
+   "private": 21,
+   "local": 0,
+   "n": 21
+  },
+  {
+   "y": 1831,
+   "private": 9,
+   "local": 1,
+   "n": 10
+  },
+  {
+   "y": 1832,
+   "private": 11,
+   "local": 1,
+   "n": 12
+  },
+  {
+   "y": 1833,
+   "private": 15,
+   "local": 0,
+   "n": 15
+  },
+  {
+   "y": 1834,
+   "private": 14,
+   "local": 0,
+   "n": 14
+  },
+  {
+   "y": 1835,
+   "private": 4,
+   "local": 0,
+   "n": 4
+  },
+  {
+   "y": 1836,
+   "private": 10,
+   "local": 0,
+   "n": 10
+  },
+  {
+   "y": 1837,
+   "private": 9,
+   "local": 1,
+   "n": 10
+  },
+  {
+   "y": 1838,
+   "private": 17,
+   "local": 2,
+   "n": 19
+  },
+  {
+   "y": 1839,
+   "private": 19,
+   "local": 0,
+   "n": 19
+  },
+  {
+   "y": 1840,
+   "private": 14,
+   "local": 0,
+   "n": 14
+  },
+  {
+   "y": 1841,
+   "private": 22,
+   "local": 0,
+   "n": 22
+  },
+  {
+   "y": 1842,
+   "private": 12,
+   "local": 0,
+   "n": 12
+  },
+  {
+   "y": 1843,
+   "private": 11,
+   "local": 0,
+   "n": 11
+  },
+  {
+   "y": 1844,
+   "private": 8,
+   "local": 1,
+   "n": 9
+  },
+  {
+   "y": 1845,
+   "private": 4,
+   "local": 0,
+   "n": 4
+  },
+  {
+   "y": 1846,
+   "private": 2,
+   "local": 1,
+   "n": 3
+  },
+  {
+   "y": 1847,
+   "private": 1,
+   "local": 0,
+   "n": 1
+  },
+  {
+   "y": 1848,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  },
+  {
+   "y": 1849,
+   "private": 0,
+   "local": 0,
+   "n": 0
+  }
+ ],
+ "early": {
+  "before1700": 6,
+  "after1849": 3
+ },
+ "peaks": {
+  "private_year": 1801,
+  "private_n": 100,
+  "all_year": 1811,
+  "all_n": 125,
+  "first_wave_year": 1777,
+  "first_wave_n": 87,
+  "war_year": 1811,
+  "war_n": 125,
+  "war_private_year": 1801,
+  "war_private_n": 100,
+  "trough_year": 1784,
+  "trough_n": 11,
+  "y1760s": 359,
+  "y1770s": 626,
+  "y1750s": 147,
+  "y1780s": 229,
+  "y1760_79": 985,
+  "y1800s_all": 850,
+  "y1810s_all": 803,
+  "y1800s_private": 699,
+  "y1810s_private": 524,
+  "y1793_1815_all": 1967,
+  "y1793_1815_private": 1541,
+  "y1793_1815_local": 426,
+  "y1793_1815_per_year": 85.5,
+  "y1760_79_per_year": 49.2,
+  "years_over_100": [
+   1801,
+   1809,
+   1810,
+   1811,
+   1812,
+   1813,
+   1814
+  ],
+  "years_over_100_private": [
+   1801
+  ],
+  "y1801": 117,
+  "y1811": 125,
+  "y1813": 114,
+  "y1816": 43,
+  "y1815": 79,
+  "y1814": 114,
+  "dec_all": 1800,
+  "dec_all_n": 850,
+  "dec_private": 1800,
+  "dec_private_n": 699,
+  "local_1798_1815": 426,
+  "local_first": 1799,
+  "local_after1815": 23,
+  "local_share_1798_1815": 26.39,
+  "local_share_1811_14": 50.96
+ },
+ "eras": {
+  "private": {
+   "before": 1564,
+   "war": 1541,
+   "after": 550,
+   "n": 3655,
+   "before_pct": 42.79,
+   "war_pct": 42.16,
+   "after_pct": 15.05
+  },
+  "local": {
+   "before": 0,
+   "war": 426,
+   "after": 23,
+   "n": 449,
+   "before_pct": 0.0,
+   "war_pct": 94.88,
+   "after_pct": 5.12
+  },
+  "all": {
+   "before": 1564,
+   "war": 1967,
+   "after": 573,
+   "n": 4104,
+   "before_pct": 38.11,
+   "war_pct": 47.93,
+   "after_pct": 13.96
+  },
+  "war_years": 23,
+  "war_share_of_years": 7.37
+ },
+ "counties": {
+  "Northamptonshire": {
+   "county": "Northamptonshire",
+   "name": "Northamptonshire",
+   "nation": "England",
+   "area_km2": 2574.0,
+   "private": 193,
+   "local": 2,
+   "all": 195,
+   "per100_private": 7.498,
+   "per100_all": 7.576,
+   "first": 1727,
+   "last": 1841,
+   "median_year": 1778,
+   "peak_dec": 1770,
+   "before_pct": 65.64,
+   "war_pct": 24.1,
+   "places": 245,
+   "rank": 1
+  },
+  "Leicestershire": {
+   "county": "Leicestershire",
+   "name": "Leicestershire",
+   "nation": "England",
+   "area_km2": 2164.4,
+   "private": 150,
+   "local": 2,
+   "all": 152,
+   "per100_private": 6.93,
+   "per100_all": 7.023,
+   "first": 1729,
+   "last": 1842,
+   "median_year": 1772,
+   "peak_dec": 1770,
+   "before_pct": 81.58,
+   "war_pct": 16.45,
+   "places": 183,
+   "rank": 2
+  },
+  "Rutland": {
+   "county": "Rutland",
+   "name": "Rutland",
+   "nation": "England",
+   "area_km2": 379.0,
+   "private": 25,
+   "local": 0,
+   "all": 25,
+   "per100_private": 6.596,
+   "per100_all": 6.596,
+   "first": 1692,
+   "last": 1820,
+   "median_year": 1773,
+   "peak_dec": 1790,
+   "before_pct": 52.0,
+   "war_pct": 44.0,
+   "places": 27,
+   "rank": 3
+  },
+  "Huntingdonshire": {
+   "county": "Huntingdonshire",
+   "name": "Huntingdonshire",
+   "nation": "England",
+   "area_km2": 1000.3,
+   "private": 60,
+   "local": 5,
+   "all": 65,
+   "per100_private": 5.998,
+   "per100_all": 6.498,
+   "first": 1727,
+   "last": 1844,
+   "median_year": 1800,
+   "peak_dec": 1800,
+   "before_pct": 33.85,
+   "war_pct": 56.92,
+   "places": 75,
+   "rank": 4
+  },
+  "Nottinghamshire": {
+   "county": "Nottinghamshire",
+   "name": "Nottinghamshire",
+   "nation": "England",
+   "area_km2": 2199.2,
+   "private": 128,
+   "local": 2,
+   "all": 130,
+   "per100_private": 5.82,
+   "per100_all": 5.911,
+   "first": 1758,
+   "last": 1845,
+   "median_year": 1792,
+   "peak_dec": 1790,
+   "before_pct": 52.31,
+   "war_pct": 40.0,
+   "places": 155,
+   "rank": 5
+  },
+  "Warwickshire": {
+   "county": "Warwickshire",
+   "name": "Warwickshire",
+   "nation": "England",
+   "area_km2": 2370.1,
+   "private": 134,
+   "local": 3,
+   "all": 137,
+   "per100_private": 5.654,
+   "per100_all": 5.78,
+   "first": 1720,
+   "last": 1841,
+   "median_year": 1775,
+   "peak_dec": 1770,
+   "before_pct": 65.69,
+   "war_pct": 24.82,
+   "places": 170,
+   "rank": 6
+  },
+  "Bedfordshire": {
+   "county": "Bedfordshire",
+   "name": "Bedfordshire",
+   "nation": "England",
+   "area_km2": 1202.8,
+   "private": 67,
+   "local": 9,
+   "all": 76,
+   "per100_private": 5.57,
+   "per100_all": 6.319,
+   "first": 1741,
+   "last": 1843,
+   "median_year": 1800,
+   "peak_dec": 1800,
+   "before_pct": 19.74,
+   "war_pct": 68.42,
+   "places": 86,
+   "rank": 7
+  },
+  "Oxfordshire": {
+   "county": "Oxfordshire",
+   "name": "Oxfordshire",
+   "nation": "England",
+   "area_km2": 1999.1,
+   "private": 104,
+   "local": 10,
+   "all": 114,
+   "per100_private": 5.202,
+   "per100_all": 5.703,
+   "first": 1729,
+   "last": 1843,
+   "median_year": 1793,
+   "peak_dec": 1770,
+   "before_pct": 47.37,
+   "war_pct": 40.35,
+   "places": 136,
+   "rank": 8
+  },
+  "Worcestershire": {
+   "county": "Worcestershire",
+   "name": "Worcestershire",
+   "nation": "England",
+   "area_km2": 1935.1,
+   "private": 98,
+   "local": 2,
+   "all": 100,
+   "per100_private": 5.064,
+   "per100_all": 5.168,
+   "first": 1664,
+   "last": 1833,
+   "median_year": 1796,
+   "peak_dec": 1770,
+   "before_pct": 47.0,
+   "war_pct": 40.0,
+   "places": 113,
+   "rank": 9
+  },
+  "Buckinghamshire": {
+   "county": "Buckinghamshire",
+   "name": "Buckinghamshire",
+   "nation": "England",
+   "area_km2": 1955.4,
+   "private": 98,
+   "local": 8,
+   "all": 106,
+   "per100_private": 5.012,
+   "per100_all": 5.421,
+   "first": 1737,
+   "last": 1844,
+   "median_year": 1796,
+   "peak_dec": 1790,
+   "before_pct": 39.62,
+   "war_pct": 45.28,
+   "places": 119,
+   "rank": 10
+  },
+  "Derbyshire": {
+   "county": "Derbyshire",
+   "name": "Derbyshire",
+   "nation": "England",
+   "area_km2": 2660.6,
+   "private": 119,
+   "local": 6,
+   "all": 125,
+   "per100_private": 4.473,
+   "per100_all": 4.698,
+   "first": 1726,
+   "last": 1841,
+   "median_year": 1789,
+   "peak_dec": 1780,
+   "before_pct": 56.0,
+   "war_pct": 25.6,
+   "places": 158,
+   "rank": 11
+  },
+  "Cambridgeshire": {
+   "county": "Cambridgeshire",
+   "name": "Cambridgeshire",
+   "nation": "England",
+   "area_km2": 2308.3,
+   "private": 100,
+   "local": 4,
+   "all": 104,
+   "per100_private": 4.332,
+   "per100_all": 4.505,
+   "first": 1769,
+   "last": 1845,
+   "median_year": 1811,
+   "peak_dec": 1800,
+   "before_pct": 5.77,
+   "war_pct": 59.62,
+   "places": 124,
+   "rank": 12
+  },
+  "Gloucestershire": {
+   "county": "Gloucestershire",
+   "name": "Gloucestershire",
+   "nation": "England",
+   "area_km2": 3292.5,
+   "private": 142,
+   "local": 4,
+   "all": 146,
+   "per100_private": 4.313,
+   "per100_all": 4.434,
+   "first": 1713,
+   "last": 1842,
+   "median_year": 1795,
+   "peak_dec": 1770,
+   "before_pct": 43.15,
+   "war_pct": 41.78,
+   "places": 194,
+   "rank": 13
+  },
+  "Norfolk": {
+   "county": "Norfolk",
+   "name": "Norfolk",
+   "nation": "England",
+   "area_km2": 5285.8,
+   "private": 219,
+   "local": 42,
+   "all": 261,
+   "per100_private": 4.143,
+   "per100_all": 4.938,
+   "first": 1720,
+   "last": 1847,
+   "median_year": 1807,
+   "peak_dec": 1800,
+   "before_pct": 16.09,
+   "war_pct": 67.82,
+   "places": 406,
+   "rank": 14
+  },
+  "Berkshire": {
+   "county": "Berkshire",
+   "name": "Berkshire",
+   "nation": "England",
+   "area_km2": 1847.7,
+   "private": 75,
+   "local": 11,
+   "all": 86,
+   "per100_private": 4.059,
+   "per100_all": 4.654,
+   "first": 1723,
+   "last": 1859,
+   "median_year": 1802,
+   "peak_dec": 1800,
+   "before_pct": 29.07,
+   "war_pct": 59.3,
+   "places": 122,
+   "rank": 15
+  },
+  "Middlesex": {
+   "county": "Middlesex",
+   "name": "Middlesex",
+   "nation": "England",
+   "area_km2": 734.8,
+   "private": 28,
+   "local": 3,
+   "all": 31,
+   "per100_private": 3.811,
+   "per100_all": 4.219,
+   "first": 1766,
+   "last": 1825,
+   "median_year": 1811,
+   "peak_dec": 1810,
+   "before_pct": 16.13,
+   "war_pct": 61.29,
+   "places": 39,
+   "rank": 16
+  },
+  "Lincolnshire": {
+   "county": "Lincolnshire",
+   "name": "Lincolnshire",
+   "nation": "England",
+   "area_km2": 7013.7,
+   "private": 265,
+   "local": 20,
+   "all": 285,
+   "per100_private": 3.778,
+   "per100_all": 4.063,
+   "first": 1733,
+   "last": 1873,
+   "median_year": 1786,
+   "peak_dec": 1770,
+   "before_pct": 56.14,
+   "war_pct": 36.14,
+   "places": 349,
+   "rank": 17
+  },
+  "Yorkshire": {
+   "county": "Yorkshire",
+   "name": "Yorkshire",
+   "nation": "England",
+   "area_km2": 15648.5,
+   "private": 544,
+   "local": 31,
+   "all": 575,
+   "per100_private": 3.476,
+   "per100_all": 3.674,
+   "first": 1725,
+   "last": 1844,
+   "median_year": 1793,
+   "peak_dec": 1800,
+   "before_pct": 49.39,
+   "war_pct": 39.3,
+   "places": 729,
+   "rank": 18
+  },
+  "Wiltshire": {
+   "county": "Wiltshire",
+   "name": "Wiltshire",
+   "nation": "England",
+   "area_km2": 3519.1,
+   "private": 115,
+   "local": 9,
+   "all": 124,
+   "per100_private": 3.268,
+   "per100_all": 3.524,
+   "first": 1725,
+   "last": 1834,
+   "median_year": 1802,
+   "peak_dec": 1800,
+   "before_pct": 29.84,
+   "war_pct": 52.42,
+   "places": 178,
+   "rank": 19
+  },
+  "Somerset": {
+   "county": "Somerset",
+   "name": "Somerset",
+   "nation": "England",
+   "area_km2": 4211.2,
+   "private": 124,
+   "local": 10,
+   "all": 134,
+   "per100_private": 2.945,
+   "per100_all": 3.182,
+   "first": 1719,
+   "last": 1842,
+   "median_year": 1798,
+   "peak_dec": 1790,
+   "before_pct": 23.13,
+   "war_pct": 61.94,
+   "places": 194,
+   "rank": 20
+  },
+  "Staffordshire": {
+   "county": "Staffordshire",
+   "name": "Staffordshire",
+   "nation": "England",
+   "area_km2": 3012.7,
+   "private": 76,
+   "local": 6,
+   "all": 82,
+   "per100_private": 2.523,
+   "per100_all": 2.722,
+   "first": 1719,
+   "last": 1841,
+   "median_year": 1798,
+   "peak_dec": 1770,
+   "before_pct": 41.46,
+   "war_pct": 45.12,
+   "places": 118,
+   "rank": 21
+  },
+  "Dorset": {
+   "county": "Dorset",
+   "name": "Dorset",
+   "nation": "England",
+   "area_km2": 2610.3,
+   "private": 63,
+   "local": 1,
+   "all": 64,
+   "per100_private": 2.414,
+   "per100_all": 2.452,
+   "first": 1732,
+   "last": 1837,
+   "median_year": 1808,
+   "peak_dec": 1800,
+   "before_pct": 15.62,
+   "war_pct": 60.94,
+   "places": 72,
+   "rank": 22
+  },
+  "Hampshire": {
+   "county": "Hampshire",
+   "name": "Hampshire",
+   "nation": "England",
+   "area_km2": 4275.5,
+   "private": 82,
+   "local": 5,
+   "all": 87,
+   "per100_private": 1.918,
+   "per100_all": 2.035,
+   "first": 1709,
+   "last": 1843,
+   "median_year": 1804,
+   "peak_dec": 1810,
+   "before_pct": 32.18,
+   "war_pct": 49.43,
+   "places": 118,
+   "rank": 23
+  },
+  "Suffolk": {
+   "county": "Suffolk",
+   "name": "Suffolk",
+   "nation": "England",
+   "area_km2": 3852.5,
+   "private": 70,
+   "local": 7,
+   "all": 77,
+   "per100_private": 1.817,
+   "per100_all": 1.999,
+   "first": 1728,
+   "last": 1839,
+   "median_year": 1809,
+   "peak_dec": 1810,
+   "before_pct": 7.79,
+   "war_pct": 75.32,
+   "places": 118,
+   "rank": 24
+  },
+  "Surrey": {
+   "county": "Surrey",
+   "name": "Surrey",
+   "nation": "England",
+   "area_km2": 1954.4,
+   "private": 35,
+   "local": 5,
+   "all": 40,
+   "per100_private": 1.791,
+   "per100_all": 2.047,
+   "first": 1779,
+   "last": 1843,
+   "median_year": 1806,
+   "peak_dec": 1800,
+   "before_pct": 2.5,
+   "war_pct": 75.0,
+   "places": 54,
+   "rank": 25
+  },
+  "Hertfordshire": {
+   "county": "Hertfordshire",
+   "name": "Hertfordshire",
+   "nation": "England",
+   "area_km2": 1651.8,
+   "private": 29,
+   "local": 5,
+   "all": 34,
+   "per100_private": 1.756,
+   "per100_all": 2.058,
+   "first": 1728,
+   "last": 1830,
+   "median_year": 1801,
+   "peak_dec": 1800,
+   "before_pct": 23.53,
+   "war_pct": 67.65,
+   "places": 42,
+   "rank": 26
+  },
+  "Cumberland": {
+   "county": "Cumberland",
+   "name": "Cumberland",
+   "nation": "England",
+   "area_km2": 3879.6,
+   "private": 67,
+   "local": 10,
+   "all": 77,
+   "per100_private": 1.727,
+   "per100_all": 1.985,
+   "first": 1760,
+   "last": 1842,
+   "median_year": 1811,
+   "peak_dec": 1810,
+   "before_pct": 20.78,
+   "war_pct": 51.95,
+   "places": 101,
+   "rank": 27
+  },
+  "Herefordshire": {
+   "county": "Herefordshire",
+   "name": "Herefordshire",
+   "nation": "England",
+   "area_km2": 2158.1,
+   "private": 37,
+   "local": 5,
+   "all": 42,
+   "per100_private": 1.714,
+   "per100_all": 1.946,
+   "first": 1772,
+   "last": 1833,
+   "median_year": 1809,
+   "peak_dec": 1810,
+   "before_pct": 9.52,
+   "war_pct": 78.57,
+   "places": 65,
+   "rank": 28
+  },
+  "Westmorland": {
+   "county": "Westmorland",
+   "name": "Westmorland",
+   "nation": "England",
+   "area_km2": 2055.5,
+   "private": 34,
+   "local": 8,
+   "all": 42,
+   "per100_private": 1.654,
+   "per100_all": 2.043,
+   "first": 1767,
+   "last": 1838,
+   "median_year": 1811,
+   "peak_dec": 1810,
+   "before_pct": 30.95,
+   "war_pct": 45.24,
+   "places": 53,
+   "rank": 29
+  },
+  "Shropshire": {
+   "county": "Shropshire",
+   "name": "Shropshire",
+   "nation": "England",
+   "area_km2": 3422.3,
+   "private": 45,
+   "local": 6,
+   "all": 51,
+   "per100_private": 1.315,
+   "per100_all": 1.49,
+   "first": 1764,
+   "last": 1845,
+   "median_year": 1806,
+   "peak_dec": 1800,
+   "before_pct": 29.41,
+   "war_pct": 47.06,
+   "places": 89,
+   "rank": 30
+  },
+  "County Durham": {
+   "county": "County Durham",
+   "name": "Durham",
+   "nation": "England",
+   "area_km2": 2751.0,
+   "private": 36,
+   "local": 6,
+   "all": 42,
+   "per100_private": 1.309,
+   "per100_all": 1.527,
+   "first": 1756,
+   "last": 1834,
+   "median_year": 1782,
+   "peak_dec": 1760,
+   "before_pct": 54.76,
+   "war_pct": 38.1,
+   "places": 52,
+   "rank": 31
+  },
+  "Flintshire": {
+   "county": "Flintshire",
+   "name": "Flintshire",
+   "nation": "Wales",
+   "area_km2": 669.2,
+   "private": 7,
+   "local": 7,
+   "all": 14,
+   "per100_private": 1.046,
+   "per100_all": 2.092,
+   "first": 1775,
+   "last": 1826,
+   "median_year": 1803,
+   "peak_dec": 1790,
+   "before_pct": 21.43,
+   "war_pct": 71.43,
+   "places": 19,
+   "rank": 32
+  },
+  "Lancashire": {
+   "county": "Lancashire",
+   "name": "Lancashire",
+   "nation": "England",
+   "area_km2": 4953.7,
+   "private": 51,
+   "local": 7,
+   "all": 58,
+   "per100_private": 1.03,
+   "per100_all": 1.171,
+   "first": 1724,
+   "last": 1830,
+   "median_year": 1796,
+   "peak_dec": 1790,
+   "before_pct": 39.66,
+   "war_pct": 46.55,
+   "places": 78,
+   "rank": 33
+  },
+  "Sussex": {
+   "county": "Sussex",
+   "name": "Sussex",
+   "nation": "England",
+   "area_km2": 3812.9,
+   "private": 35,
+   "local": 3,
+   "all": 38,
+   "per100_private": 0.918,
+   "per100_all": 0.997,
+   "first": 1767,
+   "last": 1841,
+   "median_year": 1809,
+   "peak_dec": 1800,
+   "before_pct": 15.79,
+   "war_pct": 55.26,
+   "places": 49,
+   "rank": 34
+  },
+  "Cheshire": {
+   "county": "Cheshire",
+   "name": "Cheshire",
+   "nation": "England",
+   "area_km2": 2736.1,
+   "private": 23,
+   "local": 10,
+   "all": 33,
+   "per100_private": 0.841,
+   "per100_all": 1.206,
+   "first": 1765,
+   "last": 1835,
+   "median_year": 1807,
+   "peak_dec": 1790,
+   "before_pct": 24.24,
+   "war_pct": 54.55,
+   "places": 45,
+   "rank": 35
+  },
+  "Essex": {
+   "county": "Essex",
+   "name": "Essex",
+   "nation": "England",
+   "area_km2": 4022.0,
+   "private": 32,
+   "local": 3,
+   "all": 35,
+   "per100_private": 0.796,
+   "per100_all": 0.87,
+   "first": 1768,
+   "last": 1843,
+   "median_year": 1812,
+   "peak_dec": 1810,
+   "before_pct": 5.71,
+   "war_pct": 60.0,
+   "places": 50,
+   "rank": 36
+  },
+  "Northumberland": {
+   "county": "Northumberland",
+   "name": "Northumberland",
+   "nation": "England",
+   "area_km2": 5224.0,
+   "private": 32,
+   "local": 12,
+   "all": 44,
+   "per100_private": 0.613,
+   "per100_all": 0.842,
+   "first": 1728,
+   "last": 1844,
+   "median_year": 1792,
+   "peak_dec": 1800,
+   "before_pct": 50.0,
+   "war_pct": 38.64,
+   "places": 51,
+   "rank": 37
+  },
+  "Carmarthenshire": {
+   "county": "Carmarthenshire",
+   "name": "Carmarthenshire",
+   "nation": "Wales",
+   "area_km2": 2369.7,
+   "private": 12,
+   "local": 0,
+   "all": 12,
+   "per100_private": 0.506,
+   "per100_all": 0.506,
+   "first": 1807,
+   "last": 1845,
+   "median_year": 1812,
+   "peak_dec": 1810,
+   "before_pct": 0.0,
+   "war_pct": 75.0,
+   "places": 31,
+   "rank": 38
+  },
+  "Caernarfonshire": {
+   "county": "Caernarfonshire",
+   "name": "Caernarfonshire",
+   "nation": "Wales",
+   "area_km2": 1421.2,
+   "private": 7,
+   "local": 2,
+   "all": 9,
+   "per100_private": 0.493,
+   "per100_all": 0.633,
+   "first": 1806,
+   "last": 1812,
+   "median_year": 1808,
+   "peak_dec": 1800,
+   "before_pct": 0.0,
+   "war_pct": 100.0,
+   "places": 20,
+   "rank": 39
+  },
+  "Montgomeryshire": {
+   "county": "Montgomeryshire",
+   "name": "Montgomeryshire",
+   "nation": "Wales",
+   "area_km2": 2143.3,
+   "private": 9,
+   "local": 1,
+   "all": 10,
+   "per100_private": 0.42,
+   "per100_all": 0.467,
+   "first": 1760,
+   "last": 1832,
+   "median_year": 1796,
+   "peak_dec": 1780,
+   "before_pct": 40.0,
+   "war_pct": 40.0,
+   "places": 18,
+   "rank": 40
+  },
+  "Denbighshire": {
+   "county": "Denbighshire",
+   "name": "Denbighshire",
+   "nation": "Wales",
+   "area_km2": 1790.6,
+   "private": 7,
+   "local": 4,
+   "all": 11,
+   "per100_private": 0.391,
+   "per100_all": 0.614,
+   "first": 1802,
+   "last": 1843,
+   "median_year": 1813,
+   "peak_dec": 1800,
+   "before_pct": 0.0,
+   "war_pct": 63.64,
+   "places": 24,
+   "rank": 41
+  },
+  "Radnorshire": {
+   "county": "Radnorshire",
+   "name": "Radnorshire",
+   "nation": "Wales",
+   "area_km2": 1284.9,
+   "private": 5,
+   "local": 4,
+   "all": 9,
+   "per100_private": 0.389,
+   "per100_all": 0.7,
+   "first": 1810,
+   "last": 1846,
+   "median_year": 1828,
+   "peak_dec": 1810,
+   "before_pct": 0.0,
+   "war_pct": 44.44,
+   "places": 17,
+   "rank": 42
+  },
+  "Devon": {
+   "county": "Devon",
+   "name": "Devon",
+   "nation": "England",
+   "area_km2": 6772.9,
+   "private": 26,
+   "local": 2,
+   "all": 28,
+   "per100_private": 0.384,
+   "per100_all": 0.413,
+   "first": 1799,
+   "last": 1842,
+   "median_year": 1813,
+   "peak_dec": 1810,
+   "before_pct": 0.0,
+   "war_pct": 64.29,
+   "places": 38,
+   "rank": 43
+  },
+  "Kent": {
+   "county": "Kent",
+   "name": "Kent",
+   "nation": "England",
+   "area_km2": 4025.3,
+   "private": 15,
+   "local": 3,
+   "all": 18,
+   "per100_private": 0.373,
+   "per100_all": 0.447,
+   "first": 1562,
+   "last": 1840,
+   "median_year": 1810,
+   "peak_dec": 1810,
+   "before_pct": 27.78,
+   "war_pct": 50.0,
+   "places": 24,
+   "rank": 44
+  },
+  "Pembrokeshire": {
+   "county": "Pembrokeshire",
+   "name": "Pembrokeshire",
+   "nation": "Wales",
+   "area_km2": 1638.1,
+   "private": 6,
+   "local": 1,
+   "all": 7,
+   "per100_private": 0.366,
+   "per100_all": 0.427,
+   "first": 1786,
+   "last": 1832,
+   "median_year": 1809,
+   "peak_dec": 1780,
+   "before_pct": 28.57,
+   "war_pct": 57.14,
+   "places": 12,
+   "rank": 45
+  },
+  "Merionethshire": {
+   "county": "Merionethshire",
+   "name": "Merionethshire",
+   "nation": "Wales",
+   "area_km2": 1696.2,
+   "private": 6,
+   "local": 0,
+   "all": 6,
+   "per100_private": 0.354,
+   "per100_all": 0.354,
+   "first": 1805,
+   "last": 1810,
+   "median_year": 1807,
+   "peak_dec": 1800,
+   "before_pct": 0.0,
+   "war_pct": 100.0,
+   "places": 15,
+   "rank": 46
+  },
+  "Monmouthshire": {
+   "county": "Monmouthshire",
+   "name": "Monmouthshire",
+   "nation": "Wales",
+   "area_km2": 1402.9,
+   "private": 3,
+   "local": 0,
+   "all": 3,
+   "per100_private": 0.214,
+   "per100_all": 0.214,
+   "first": 1776,
+   "last": 1813,
+   "median_year": 1808,
+   "peak_dec": 1770,
+   "before_pct": 33.33,
+   "war_pct": 66.67,
+   "places": 4,
+   "rank": 47
+  },
+  "Cardiganshire": {
+   "county": "Cardiganshire",
+   "name": "Cardiganshire",
+   "nation": "Wales",
+   "area_km2": 1803.0,
+   "private": 3,
+   "local": 0,
+   "all": 3,
+   "per100_private": 0.166,
+   "per100_all": 0.166,
+   "first": 1812,
+   "last": 1815,
+   "median_year": 1813,
+   "peak_dec": 1810,
+   "before_pct": 0.0,
+   "war_pct": 100.0,
+   "places": 5,
+   "rank": 48
+  },
+  "Anglesey": {
+   "county": "Anglesey",
+   "name": "Anglesey",
+   "nation": "Wales",
+   "area_km2": 725.3,
+   "private": 1,
+   "local": 2,
+   "all": 3,
+   "per100_private": 0.138,
+   "per100_all": 0.414,
+   "first": 1812,
+   "last": 1815,
+   "median_year": 1814,
+   "peak_dec": 1810,
+   "before_pct": 0.0,
+   "war_pct": 100.0,
+   "places": 8,
+   "rank": 49
+  },
+  "Brecknockshire": {
+   "county": "Brecknockshire",
+   "name": "Brecknockshire",
+   "nation": "Wales",
+   "area_km2": 1896.8,
+   "private": 2,
+   "local": 1,
+   "all": 3,
+   "per100_private": 0.105,
+   "per100_all": 0.158,
+   "first": 1807,
+   "last": 1814,
+   "median_year": 1814,
+   "peak_dec": 1810,
+   "before_pct": 0.0,
+   "war_pct": 100.0,
+   "places": 5,
+   "rank": 50
+  },
+  "Glamorgan": {
+   "county": "Glamorgan",
+   "name": "Glamorgan",
+   "nation": "Wales",
+   "area_km2": 2122.9,
+   "private": 2,
+   "local": 0,
+   "all": 2,
+   "per100_private": 0.094,
+   "per100_all": 0.094,
+   "first": 1762,
+   "last": 1833,
+   "median_year": 1797,
+   "peak_dec": 1760,
+   "before_pct": 50.0,
+   "war_pct": 0.0,
+   "places": 2,
+   "rank": 51
+  },
+  "Cornwall": {
+   "county": "Cornwall",
+   "name": "Cornwall",
+   "nation": "England",
+   "area_km2": 3607.9,
+   "private": 1,
+   "local": 1,
+   "all": 2,
+   "per100_private": 0.028,
+   "per100_all": 0.055,
+   "first": 1809,
+   "last": 1818,
+   "median_year": 1813,
+   "peak_dec": 1800,
+   "before_pct": 0.0,
+   "war_pct": 50.0,
+   "places": 7,
+   "rank": 52
+  }
+ },
+ "county_rank": [
+  {
+   "county": "Northamptonshire",
+   "name": "Northamptonshire",
+   "per100": 7.498,
+   "n": 193,
+   "all": 195
+  },
+  {
+   "county": "Leicestershire",
+   "name": "Leicestershire",
+   "per100": 6.93,
+   "n": 150,
+   "all": 152
+  },
+  {
+   "county": "Rutland",
+   "name": "Rutland",
+   "per100": 6.596,
+   "n": 25,
+   "all": 25
+  },
+  {
+   "county": "Huntingdonshire",
+   "name": "Huntingdonshire",
+   "per100": 5.998,
+   "n": 60,
+   "all": 65
+  },
+  {
+   "county": "Nottinghamshire",
+   "name": "Nottinghamshire",
+   "per100": 5.82,
+   "n": 128,
+   "all": 130
+  },
+  {
+   "county": "Warwickshire",
+   "name": "Warwickshire",
+   "per100": 5.654,
+   "n": 134,
+   "all": 137
+  },
+  {
+   "county": "Bedfordshire",
+   "name": "Bedfordshire",
+   "per100": 5.57,
+   "n": 67,
+   "all": 76
+  },
+  {
+   "county": "Oxfordshire",
+   "name": "Oxfordshire",
+   "per100": 5.202,
+   "n": 104,
+   "all": 114
+  },
+  {
+   "county": "Worcestershire",
+   "name": "Worcestershire",
+   "per100": 5.064,
+   "n": 98,
+   "all": 100
+  },
+  {
+   "county": "Buckinghamshire",
+   "name": "Buckinghamshire",
+   "per100": 5.012,
+   "n": 98,
+   "all": 106
+  },
+  {
+   "county": "Derbyshire",
+   "name": "Derbyshire",
+   "per100": 4.473,
+   "n": 119,
+   "all": 125
+  },
+  {
+   "county": "Cambridgeshire",
+   "name": "Cambridgeshire",
+   "per100": 4.332,
+   "n": 100,
+   "all": 104
+  },
+  {
+   "county": "Gloucestershire",
+   "name": "Gloucestershire",
+   "per100": 4.313,
+   "n": 142,
+   "all": 146
+  },
+  {
+   "county": "Norfolk",
+   "name": "Norfolk",
+   "per100": 4.143,
+   "n": 219,
+   "all": 261
+  },
+  {
+   "county": "Berkshire",
+   "name": "Berkshire",
+   "per100": 4.059,
+   "n": 75,
+   "all": 86
+  },
+  {
+   "county": "Middlesex",
+   "name": "Middlesex",
+   "per100": 3.811,
+   "n": 28,
+   "all": 31
+  },
+  {
+   "county": "Lincolnshire",
+   "name": "Lincolnshire",
+   "per100": 3.778,
+   "n": 265,
+   "all": 285
+  },
+  {
+   "county": "Yorkshire",
+   "name": "Yorkshire",
+   "per100": 3.476,
+   "n": 544,
+   "all": 575
+  },
+  {
+   "county": "Wiltshire",
+   "name": "Wiltshire",
+   "per100": 3.268,
+   "n": 115,
+   "all": 124
+  },
+  {
+   "county": "Somerset",
+   "name": "Somerset",
+   "per100": 2.945,
+   "n": 124,
+   "all": 134
+  },
+  {
+   "county": "Staffordshire",
+   "name": "Staffordshire",
+   "per100": 2.523,
+   "n": 76,
+   "all": 82
+  },
+  {
+   "county": "Dorset",
+   "name": "Dorset",
+   "per100": 2.414,
+   "n": 63,
+   "all": 64
+  },
+  {
+   "county": "Hampshire",
+   "name": "Hampshire",
+   "per100": 1.918,
+   "n": 82,
+   "all": 87
+  },
+  {
+   "county": "Suffolk",
+   "name": "Suffolk",
+   "per100": 1.817,
+   "n": 70,
+   "all": 77
+  },
+  {
+   "county": "Surrey",
+   "name": "Surrey",
+   "per100": 1.791,
+   "n": 35,
+   "all": 40
+  },
+  {
+   "county": "Hertfordshire",
+   "name": "Hertfordshire",
+   "per100": 1.756,
+   "n": 29,
+   "all": 34
+  },
+  {
+   "county": "Cumberland",
+   "name": "Cumberland",
+   "per100": 1.727,
+   "n": 67,
+   "all": 77
+  },
+  {
+   "county": "Herefordshire",
+   "name": "Herefordshire",
+   "per100": 1.714,
+   "n": 37,
+   "all": 42
+  },
+  {
+   "county": "Westmorland",
+   "name": "Westmorland",
+   "per100": 1.654,
+   "n": 34,
+   "all": 42
+  },
+  {
+   "county": "Shropshire",
+   "name": "Shropshire",
+   "per100": 1.315,
+   "n": 45,
+   "all": 51
+  },
+  {
+   "county": "County Durham",
+   "name": "Durham",
+   "per100": 1.309,
+   "n": 36,
+   "all": 42
+  },
+  {
+   "county": "Flintshire",
+   "name": "Flintshire",
+   "per100": 1.046,
+   "n": 7,
+   "all": 14
+  },
+  {
+   "county": "Lancashire",
+   "name": "Lancashire",
+   "per100": 1.03,
+   "n": 51,
+   "all": 58
+  },
+  {
+   "county": "Sussex",
+   "name": "Sussex",
+   "per100": 0.918,
+   "n": 35,
+   "all": 38
+  },
+  {
+   "county": "Cheshire",
+   "name": "Cheshire",
+   "per100": 0.841,
+   "n": 23,
+   "all": 33
+  },
+  {
+   "county": "Essex",
+   "name": "Essex",
+   "per100": 0.796,
+   "n": 32,
+   "all": 35
+  },
+  {
+   "county": "Northumberland",
+   "name": "Northumberland",
+   "per100": 0.613,
+   "n": 32,
+   "all": 44
+  },
+  {
+   "county": "Carmarthenshire",
+   "name": "Carmarthenshire",
+   "per100": 0.506,
+   "n": 12,
+   "all": 12
+  },
+  {
+   "county": "Caernarfonshire",
+   "name": "Caernarfonshire",
+   "per100": 0.493,
+   "n": 7,
+   "all": 9
+  },
+  {
+   "county": "Montgomeryshire",
+   "name": "Montgomeryshire",
+   "per100": 0.42,
+   "n": 9,
+   "all": 10
+  },
+  {
+   "county": "Denbighshire",
+   "name": "Denbighshire",
+   "per100": 0.391,
+   "n": 7,
+   "all": 11
+  },
+  {
+   "county": "Radnorshire",
+   "name": "Radnorshire",
+   "per100": 0.389,
+   "n": 5,
+   "all": 9
+  },
+  {
+   "county": "Devon",
+   "name": "Devon",
+   "per100": 0.384,
+   "n": 26,
+   "all": 28
+  },
+  {
+   "county": "Kent",
+   "name": "Kent",
+   "per100": 0.373,
+   "n": 15,
+   "all": 18
+  },
+  {
+   "county": "Pembrokeshire",
+   "name": "Pembrokeshire",
+   "per100": 0.366,
+   "n": 6,
+   "all": 7
+  },
+  {
+   "county": "Merionethshire",
+   "name": "Merionethshire",
+   "per100": 0.354,
+   "n": 6,
+   "all": 6
+  },
+  {
+   "county": "Monmouthshire",
+   "name": "Monmouthshire",
+   "per100": 0.214,
+   "n": 3,
+   "all": 3
+  },
+  {
+   "county": "Cardiganshire",
+   "name": "Cardiganshire",
+   "per100": 0.166,
+   "n": 3,
+   "all": 3
+  },
+  {
+   "county": "Anglesey",
+   "name": "Anglesey",
+   "per100": 0.138,
+   "n": 1,
+   "all": 3
+  },
+  {
+   "county": "Brecknockshire",
+   "name": "Brecknockshire",
+   "per100": 0.105,
+   "n": 2,
+   "all": 3
+  },
+  {
+   "county": "Glamorgan",
+   "name": "Glamorgan",
+   "per100": 0.094,
+   "n": 2,
+   "all": 2
+  },
+  {
+   "county": "Cornwall",
+   "name": "Cornwall",
+   "per100": 0.028,
+   "n": 1,
+   "all": 2
+  }
+ ],
+ "belt": {
+  "counties": [
+   "Northamptonshire",
+   "Leicestershire",
+   "Oxfordshire",
+   "Cambridgeshire",
+   "Huntingdonshire",
+   "Bedfordshire",
+   "Buckinghamshire",
+   "Warwickshire",
+   "Rutland",
+   "Nottinghamshire",
+   "Lincolnshire",
+   "Berkshire"
+  ],
+  "n": 1399,
+  "area": 27014,
+  "per100": 5.18,
+  "area_pct": 20.61,
+  "acts_pct": 39.11,
+  "eng_per100": 2.73,
+  "eng_n": 3577,
+  "eng_area": 131080
+ },
+ "top8": [
+  "Northamptonshire",
+  "Leicestershire",
+  "Rutland",
+  "Huntingdonshire",
+  "Nottinghamshire",
+  "Warwickshire",
+  "Bedfordshire",
+  "Oxfordshire"
+ ],
+ "light": {
+  "Kent": {
+   "n": 15,
+   "all": 18,
+   "per100": 0.373,
+   "rank": 44
+  },
+  "Devon": {
+   "n": 26,
+   "all": 28,
+   "per100": 0.384,
+   "rank": 43
+  },
+  "Cornwall": {
+   "n": 1,
+   "all": 2,
+   "per100": 0.028,
+   "rank": 52
+  },
+  "Middlesex": {
+   "n": 28,
+   "all": 31,
+   "per100": 3.811,
+   "rank": 16
+  },
+  "Essex": {
+   "n": 32,
+   "all": 35,
+   "per100": 0.796,
+   "rank": 36
+  },
+  "Sussex": {
+   "n": 35,
+   "all": 38,
+   "per100": 0.918,
+   "rank": 34
+  },
+  "Surrey": {
+   "n": 35,
+   "all": 40,
+   "per100": 1.791,
+   "rank": 25
+  },
+  "Herefordshire": {
+   "n": 37,
+   "all": 42,
+   "per100": 1.714,
+   "rank": 28
+  },
+  "Shropshire": {
+   "n": 45,
+   "all": 51,
+   "per100": 1.315,
+   "rank": 30
+  },
+  "Lancashire": {
+   "n": 51,
+   "all": 58,
+   "per100": 1.03,
+   "rank": 33
+  }
+ },
+ "n_counties": 52,
+ "n_eng": 39,
+ "n_wales": 13,
+ "wales": {
+  "private": 70,
+  "all": 92,
+  "per100": 0.33,
+  "war_pct": 60.0,
+  "first": 1760
+ },
+ "no_county_private": 8,
+ "no_county_all": 147,
+ "most_acts": [
+  {
+   "county": "Yorkshire",
+   "name": "Yorkshire",
+   "n": 544,
+   "all": 575
+  },
+  {
+   "county": "Lincolnshire",
+   "name": "Lincolnshire",
+   "n": 265,
+   "all": 285
+  },
+  {
+   "county": "Norfolk",
+   "name": "Norfolk",
+   "n": 219,
+   "all": 261
+  },
+  {
+   "county": "Northamptonshire",
+   "name": "Northamptonshire",
+   "n": 193,
+   "all": 195
+  },
+  {
+   "county": "Leicestershire",
+   "name": "Leicestershire",
+   "n": 150,
+   "all": 152
+  },
+  {
+   "county": "Gloucestershire",
+   "name": "Gloucestershire",
+   "n": 142,
+   "all": 146
+  },
+  {
+   "county": "Warwickshire",
+   "name": "Warwickshire",
+   "n": 134,
+   "all": 137
+  },
+  {
+   "county": "Nottinghamshire",
+   "name": "Nottinghamshire",
+   "n": 128,
+   "all": 130
+  },
+  {
+   "county": "Somerset",
+   "name": "Somerset",
+   "n": 124,
+   "all": 134
+  },
+  {
+   "county": "Derbyshire",
+   "name": "Derbyshire",
+   "n": 119,
+   "all": 125
+  }
+ ],
+ "first": {
+  "year": 1562,
+  "title": "Plumstead Marsh (Kent) inclosure and drainage.",
+  "chapter": "7",
+  "session": "1562 (5 Eliz. 1)",
+  "std_year": 1562,
+  "std_title": "Plumstead Marsh (Kent) inclosure and drainage.",
+  "std_session": "1562 (5 Eliz. 1)",
+  "std_chapter": "7",
+  "n_before1700": 6,
+  "n_before1750": 113,
+  "n_1720s_on": 3645
+ },
+ "last": {
+  "year": 1847,
+  "title": "Terrington (Norfolk) inclosure.",
+  "chapter": "4",
+  "local_year": 1873,
+  "local_title": "Gedney Inclosure.",
+  "n_after1845": 7,
+  "n_1840s": 76
+ },
+ "county_first_last": [
+  {
+   "county": "Northamptonshire",
+   "first": 1727,
+   "last": 1841,
+   "median": 1778
+  },
+  {
+   "county": "Leicestershire",
+   "first": 1729,
+   "last": 1842,
+   "median": 1772
+  },
+  {
+   "county": "Rutland",
+   "first": 1692,
+   "last": 1820,
+   "median": 1773
+  },
+  {
+   "county": "Huntingdonshire",
+   "first": 1727,
+   "last": 1844,
+   "median": 1800
+  },
+  {
+   "county": "Nottinghamshire",
+   "first": 1758,
+   "last": 1845,
+   "median": 1792
+  },
+  {
+   "county": "Warwickshire",
+   "first": 1720,
+   "last": 1841,
+   "median": 1775
+  },
+  {
+   "county": "Bedfordshire",
+   "first": 1741,
+   "last": 1843,
+   "median": 1800
+  },
+  {
+   "county": "Oxfordshire",
+   "first": 1729,
+   "last": 1843,
+   "median": 1793
+  },
+  {
+   "county": "Worcestershire",
+   "first": 1664,
+   "last": 1833,
+   "median": 1796
+  },
+  {
+   "county": "Buckinghamshire",
+   "first": 1737,
+   "last": 1844,
+   "median": 1796
+  },
+  {
+   "county": "Derbyshire",
+   "first": 1726,
+   "last": 1841,
+   "median": 1789
+  },
+  {
+   "county": "Cambridgeshire",
+   "first": 1769,
+   "last": 1845,
+   "median": 1811
+  },
+  {
+   "county": "Gloucestershire",
+   "first": 1713,
+   "last": 1842,
+   "median": 1795
+  },
+  {
+   "county": "Norfolk",
+   "first": 1720,
+   "last": 1847,
+   "median": 1807
+  },
+  {
+   "county": "Berkshire",
+   "first": 1723,
+   "last": 1859,
+   "median": 1802
+  },
+  {
+   "county": "Middlesex",
+   "first": 1766,
+   "last": 1825,
+   "median": 1811
+  },
+  {
+   "county": "Lincolnshire",
+   "first": 1733,
+   "last": 1873,
+   "median": 1786
+  },
+  {
+   "county": "Yorkshire",
+   "first": 1725,
+   "last": 1844,
+   "median": 1793
+  },
+  {
+   "county": "Wiltshire",
+   "first": 1725,
+   "last": 1834,
+   "median": 1802
+  },
+  {
+   "county": "Somerset",
+   "first": 1719,
+   "last": 1842,
+   "median": 1798
+  },
+  {
+   "county": "Staffordshire",
+   "first": 1719,
+   "last": 1841,
+   "median": 1798
+  },
+  {
+   "county": "Dorset",
+   "first": 1732,
+   "last": 1837,
+   "median": 1808
+  },
+  {
+   "county": "Hampshire",
+   "first": 1709,
+   "last": 1843,
+   "median": 1804
+  },
+  {
+   "county": "Suffolk",
+   "first": 1728,
+   "last": 1839,
+   "median": 1809
+  },
+  {
+   "county": "Surrey",
+   "first": 1779,
+   "last": 1843,
+   "median": 1806
+  },
+  {
+   "county": "Hertfordshire",
+   "first": 1728,
+   "last": 1830,
+   "median": 1801
+  },
+  {
+   "county": "Cumberland",
+   "first": 1760,
+   "last": 1842,
+   "median": 1811
+  },
+  {
+   "county": "Herefordshire",
+   "first": 1772,
+   "last": 1833,
+   "median": 1809
+  },
+  {
+   "county": "Westmorland",
+   "first": 1767,
+   "last": 1838,
+   "median": 1811
+  },
+  {
+   "county": "Shropshire",
+   "first": 1764,
+   "last": 1845,
+   "median": 1806
+  },
+  {
+   "county": "County Durham",
+   "first": 1756,
+   "last": 1834,
+   "median": 1782
+  },
+  {
+   "county": "Flintshire",
+   "first": 1775,
+   "last": 1826,
+   "median": 1803
+  },
+  {
+   "county": "Lancashire",
+   "first": 1724,
+   "last": 1830,
+   "median": 1796
+  },
+  {
+   "county": "Sussex",
+   "first": 1767,
+   "last": 1841,
+   "median": 1809
+  },
+  {
+   "county": "Cheshire",
+   "first": 1765,
+   "last": 1835,
+   "median": 1807
+  },
+  {
+   "county": "Essex",
+   "first": 1768,
+   "last": 1843,
+   "median": 1812
+  },
+  {
+   "county": "Northumberland",
+   "first": 1728,
+   "last": 1844,
+   "median": 1792
+  },
+  {
+   "county": "Carmarthenshire",
+   "first": 1807,
+   "last": 1845,
+   "median": 1812
+  },
+  {
+   "county": "Caernarfonshire",
+   "first": 1806,
+   "last": 1812,
+   "median": 1808
+  },
+  {
+   "county": "Montgomeryshire",
+   "first": 1760,
+   "last": 1832,
+   "median": 1796
+  },
+  {
+   "county": "Denbighshire",
+   "first": 1802,
+   "last": 1843,
+   "median": 1813
+  },
+  {
+   "county": "Radnorshire",
+   "first": 1810,
+   "last": 1846,
+   "median": 1828
+  },
+  {
+   "county": "Devon",
+   "first": 1799,
+   "last": 1842,
+   "median": 1813
+  },
+  {
+   "county": "Kent",
+   "first": 1562,
+   "last": 1840,
+   "median": 1810
+  },
+  {
+   "county": "Pembrokeshire",
+   "first": 1786,
+   "last": 1832,
+   "median": 1809
+  },
+  {
+   "county": "Merionethshire",
+   "first": 1805,
+   "last": 1810,
+   "median": 1807
+  },
+  {
+   "county": "Monmouthshire",
+   "first": 1776,
+   "last": 1813,
+   "median": 1808
+  },
+  {
+   "county": "Cardiganshire",
+   "first": 1812,
+   "last": 1815,
+   "median": 1813
+  },
+  {
+   "county": "Anglesey",
+   "first": 1812,
+   "last": 1815,
+   "median": 1814
+  },
+  {
+   "county": "Brecknockshire",
+   "first": 1807,
+   "last": 1814,
+   "median": 1814
+  },
+  {
+   "county": "Glamorgan",
+   "first": 1762,
+   "last": 1833,
+   "median": 1797
+  },
+  {
+   "county": "Cornwall",
+   "first": 1809,
+   "last": 1818,
+   "median": 1813
+  }
+ ],
+ "earliest_counties": [
+  {
+   "county": "Leicestershire",
+   "median": 1772,
+   "n": 152
+  },
+  {
+   "county": "Rutland",
+   "median": 1773,
+   "n": 25
+  },
+  {
+   "county": "Warwickshire",
+   "median": 1775,
+   "n": 137
+  },
+  {
+   "county": "Northamptonshire",
+   "median": 1778,
+   "n": 195
+  },
+  {
+   "county": "County Durham",
+   "median": 1782,
+   "n": 42
+  },
+  {
+   "county": "Lincolnshire",
+   "median": 1786,
+   "n": 285
+  }
+ ],
+ "latest_counties": [
+  {
+   "county": "Radnorshire",
+   "median": 1828,
+   "n": 9
+  },
+  {
+   "county": "Brecknockshire",
+   "median": 1814,
+   "n": 3
+  },
+  {
+   "county": "Anglesey",
+   "median": 1814,
+   "n": 3
+  },
+  {
+   "county": "Denbighshire",
+   "median": 1813,
+   "n": 11
+  },
+  {
+   "county": "Devon",
+   "median": 1813,
+   "n": 28
+  },
+  {
+   "county": "Cornwall",
+   "median": 1813,
+   "n": 2
+  }
+ ],
+ "centroid": [
+  {
+   "label": "before 1750",
+   "d0": 1700,
+   "d1": 1749,
+   "n": 82,
+   "x": 452378,
+   "y": 275387,
+   "lon": -1.232,
+   "lat": 52.374,
+   "north_pct": 24.39,
+   "near": "Rugby",
+   "near_km": 2.0,
+   "near_county": "Warwickshire"
+  },
+  {
+   "label": "1750s",
+   "d0": 1750,
+   "d1": 1759,
+   "n": 124,
+   "x": 457808,
+   "y": 342274,
+   "lon": -1.1406,
+   "lat": 52.9747,
+   "north_pct": 39.52,
+   "near": "Nottingham",
+   "near_km": 2.3,
+   "near_county": "Nottinghamshire"
+  },
+  {
+   "label": "1760s",
+   "d0": 1760,
+   "d1": 1769,
+   "n": 303,
+   "x": 460801,
+   "y": 340235,
+   "lon": -1.0964,
+   "lat": 52.9561,
+   "north_pct": 43.56,
+   "near": "Carlton",
+   "near_km": 1.3,
+   "near_county": "Nottinghamshire"
+  },
+  {
+   "label": "1770s",
+   "d0": 1770,
+   "d1": 1779,
+   "n": 549,
+   "x": 455056,
+   "y": 319949,
+   "lon": -1.1853,
+   "lat": 52.7743,
+   "north_pct": 36.98,
+   "near": "Loughborough",
+   "near_km": 1.4,
+   "near_county": "Leicestershire"
+  },
+  {
+   "label": "1780s",
+   "d0": 1780,
+   "d1": 1789,
+   "n": 195,
+   "x": 447258,
+   "y": 313545,
+   "lon": -1.3018,
+   "lat": 52.7175,
+   "north_pct": 31.79,
+   "near": "Coalville",
+   "near_km": 4.6,
+   "near_county": "Leicestershire"
+  },
+  {
+   "label": "1790s",
+   "d0": 1790,
+   "d1": 1799,
+   "n": 482,
+   "x": 455957,
+   "y": 297487,
+   "lon": -1.1758,
+   "lat": 52.5723,
+   "north_pct": 29.46,
+   "near": "Braunstone Town",
+   "near_km": 4.9,
+   "near_county": "Leicestershire"
+  },
+  {
+   "label": "1800s",
+   "d0": 1800,
+   "d1": 1809,
+   "n": 716,
+   "x": 469108,
+   "y": 295935,
+   "lon": -0.9821,
+   "lat": 52.5569,
+   "north_pct": 28.21,
+   "near": "Oadby",
+   "near_km": 7.9,
+   "near_county": "Leicestershire"
+  },
+  {
+   "label": "1810s",
+   "d0": 1810,
+   "d1": 1819,
+   "n": 627,
+   "x": 448721,
+   "y": 295372,
+   "lon": -1.2828,
+   "lat": 52.554,
+   "north_pct": 30.46,
+   "near": "Earl Shilton",
+   "near_km": 3.0,
+   "near_county": "Leicestershire"
+  },
+  {
+   "label": "1820s",
+   "d0": 1820,
+   "d1": 1829,
+   "n": 169,
+   "x": 461458,
+   "y": 292509,
+   "lon": -1.0955,
+   "lat": 52.527,
+   "north_pct": 30.77,
+   "near": "Oadby",
+   "near_km": 8.1,
+   "near_county": "Leicestershire"
+  },
+  {
+   "label": "1830s and 1840s",
+   "d0": 1830,
+   "d1": 1849,
+   "n": 178,
+   "x": 449958,
+   "y": 268002,
+   "lon": -1.2687,
+   "lat": 52.3079,
+   "north_pct": 18.54,
+   "near": "Rugby",
+   "near_km": 6.9,
+   "near_county": "Warwickshire"
+  }
+ ],
+ "centroid_move": {
+  "km": 46,
+  "dx_km": -12,
+  "dy_km": -45,
+  "first_km": 73,
+  "south_km": 45,
+  "west_km": 12
+ },
+ "waves": {
+  "w1": {
+   "n": 1132,
+   "up_pct": 29.91,
+   "wales_pct": 0.44,
+   "waste_pct": 5.92,
+   "fields_pct": 0.88,
+   "mid_pct": 52.65,
+   "mean_lat": 52.85,
+   "lat53_pct": 39.34,
+   "west_pct": 13.22,
+   "multi_pct": 15.72,
+   "drain_pct": 1.06,
+   "tithe_pct": 1.68,
+   "belt_pct": 52.65,
+   "belt_n": 595,
+   "eastanglia_pct": 2.39,
+   "eastanglia_n": 27,
+   "wales_n": 5,
+   "north_pct": 25.66,
+   "north_n": 290,
+   "southwest_pct": 11.86,
+   "southwest_n": 134,
+   "southeast_pct": 1.5,
+   "southeast_n": 17
+  },
+  "war": {
+   "n": 1967,
+   "up_pct": 25.1,
+   "wales_pct": 3.5,
+   "waste_pct": 3.76,
+   "fields_pct": 0.1,
+   "mid_pct": 31.06,
+   "mean_lat": 52.53,
+   "lat53_pct": 27.88,
+   "west_pct": 26.58,
+   "multi_pct": 24.25,
+   "drain_pct": 1.88,
+   "tithe_pct": 1.95,
+   "belt_pct": 31.06,
+   "belt_n": 568,
+   "eastanglia_pct": 12.85,
+   "eastanglia_n": 235,
+   "wales_n": 64,
+   "north_pct": 18.86,
+   "north_n": 345,
+   "southwest_pct": 22.25,
+   "southwest_n": 407,
+   "southeast_pct": 6.72,
+   "southeast_n": 123
+  },
+  "after": {
+   "n": 570,
+   "up_pct": 28.14,
+   "wales_pct": 3.01,
+   "waste_pct": 5.79,
+   "fields_pct": 0.18,
+   "mid_pct": 27.96,
+   "mean_lat": 52.48,
+   "lat53_pct": 28.84,
+   "west_pct": 32.0,
+   "multi_pct": 24.39,
+   "drain_pct": 1.75,
+   "tithe_pct": 7.27,
+   "belt_pct": 27.96,
+   "belt_n": 158,
+   "eastanglia_pct": 9.73,
+   "eastanglia_n": 55,
+   "wales_n": 17,
+   "north_pct": 19.82,
+   "north_n": 112,
+   "southwest_pct": 24.07,
+   "southwest_n": 136,
+   "southeast_pct": 8.14,
+   "southeast_n": 46
+  }
+ },
+ "regions": {
+  "belt": [
+   "Northamptonshire",
+   "Leicestershire",
+   "Oxfordshire",
+   "Cambridgeshire",
+   "Huntingdonshire",
+   "Bedfordshire",
+   "Buckinghamshire",
+   "Warwickshire",
+   "Rutland",
+   "Nottinghamshire",
+   "Lincolnshire",
+   "Berkshire"
+  ],
+  "eastanglia": [
+   "Norfolk",
+   "Suffolk"
+  ],
+  "wales": [
+   "Anglesey",
+   "Brecknockshire",
+   "Caernarfonshire",
+   "Cardiganshire",
+   "Carmarthenshire",
+   "Denbighshire",
+   "Flintshire",
+   "Glamorgan",
+   "Merionethshire",
+   "Monmouthshire",
+   "Montgomeryshire",
+   "Pembrokeshire",
+   "Radnorshire"
+  ],
+  "north": [
+   "Northumberland",
+   "Cumberland",
+   "Westmorland",
+   "County Durham",
+   "Yorkshire",
+   "Lancashire"
+  ],
+  "southwest": [
+   "Cornwall",
+   "Devon",
+   "Somerset",
+   "Dorset",
+   "Wiltshire",
+   "Hampshire",
+   "Gloucestershire",
+   "Herefordshire",
+   "Shropshire",
+   "Worcestershire"
+  ],
+  "southeast": [
+   "Kent",
+   "Sussex",
+   "Surrey",
+   "Middlesex",
+   "Essex",
+   "Hertfordshire"
+  ]
+ },
+ "biggest": {
+  "title": "Over Stonnall and Lynn, Nether Stonnall and Thornes, Shenstone, Woodend, Footherley, Little Hay, Chesterfield and Little Aston (Staffordshire) inclosure.",
+  "year": 1811,
+  "n_places": 10,
+  "county": "Staffordshire",
+  "source": "private",
+  "chapter": "3",
+  "located": 4
+ },
+ "multi": {
+  "n_multi": 871,
+  "multi_pct": 21.22,
+  "n5": 29,
+  "places_per_act": 1.31
+ },
+ "twice": {
+  "n": 258,
+  "pct": 6.51,
+  "three": 25,
+  "max": 4
+ },
+ "twice_top": [
+  {
+   "place": "Elsdon",
+   "county": "Northumberland",
+   "n": 4,
+   "years": [
+    1728,
+    1769,
+    1805,
+    1807
+   ]
+  },
+  {
+   "place": "Simonburn",
+   "county": "Northumberland",
+   "n": 4,
+   "years": [
+    1754,
+    1804,
+    1805,
+    1809
+   ]
+  },
+  {
+   "place": "Chatteris",
+   "county": "Cambridgeshire",
+   "n": 4,
+   "years": [
+    1769,
+    1783,
+    1793,
+    1809
+   ]
+  },
+  {
+   "place": "Rothbury",
+   "county": "Northumberland",
+   "n": 4,
+   "years": [
+    1805,
+    1808,
+    1810,
+    1831
+   ]
+  },
+  {
+   "place": "Lanchester",
+   "county": "County Durham",
+   "n": 4,
+   "years": [
+    1762,
+    1772,
+    1773,
+    1779
+   ]
+  },
+  {
+   "place": "Welton",
+   "county": "Yorkshire",
+   "n": 3,
+   "years": [
+    1750,
+    1771,
+    1772
+   ]
+  },
+  {
+   "place": "Cheltenham",
+   "county": "Gloucestershire",
+   "n": 3,
+   "years": [
+    1778,
+    1801,
+    1830
+   ]
+  },
+  {
+   "place": "Martock",
+   "county": "Somerset",
+   "n": 3,
+   "years": [
+    1797,
+    1806,
+    1819
+   ]
+  },
+  {
+   "place": "Glastonbury",
+   "county": "Somerset",
+   "n": 3,
+   "years": [
+    1721,
+    1778,
+    1798
+   ]
+  },
+  {
+   "place": "Goring-on-Thames",
+   "county": "Oxfordshire",
+   "n": 3,
+   "years": [
+    1787,
+    1804,
+    1809
+   ]
+  },
+  {
+   "place": "Shifnal",
+   "county": "Shropshire",
+   "n": 3,
+   "years": [
+    1785,
+    1793,
+    1813
+   ]
+  },
+  {
+   "place": "Kellington",
+   "county": "Yorkshire",
+   "n": 3,
+   "years": [
+    1772,
+    1791,
+    1800
+   ]
+  }
+ ],
+ "twice_gap": [
+  {
+   "place": "Eccleshall",
+   "county": "Staffordshire",
+   "years": [
+    1719,
+    1841
+   ],
+   "gap": 122
+  },
+  {
+   "place": "Compton Bassett",
+   "county": "Wiltshire",
+   "years": [
+    1725,
+    1831
+   ],
+   "gap": 106
+  },
+  {
+   "place": "Barston",
+   "county": "Warwickshire",
+   "years": [
+    1732,
+    1815
+   ],
+   "gap": 83
+  },
+  {
+   "place": "Gedney",
+   "county": "Lincolnshire",
+   "years": [
+    1791,
+    1873
+   ],
+   "gap": 82
+  },
+  {
+   "place": "Sunningwell",
+   "county": "Berkshire",
+   "years": [
+    1723,
+    1802
+   ],
+   "gap": 79
+  },
+  {
+   "place": "Elsdon",
+   "county": "Northumberland",
+   "years": [
+    1728,
+    1769,
+    1805,
+    1807
+   ],
+   "gap": 79
+  }
+ ],
+ "plumstead": {
+  "n": 5,
+  "years": [
+   1562,
+   1566,
+   1572,
+   1800,
+   1810
+  ]
+ },
+ "knaresborough": {
+  "n": 1,
+  "years": [
+   1770
+  ]
+ },
+ "wording": {
+  "drain_pct": 1.68,
+  "tithe_pct": 2.63,
+  "waste_pct": 5.17
+ },
+ "meta": {
+  "page": "https://maps.tristanhotham.com/enclosure/",
+  "repo": "https://github.com/Tristan-Hotham/enclosure",
+  "doi": "10.5281/zenodo.23873003",
+  "blog": "https://blog.tristanhotham.com/2026/10/31/enclosure/",
+  "slug": "enclosure",
+  "war": [
+   1793,
+   1815
+  ],
+  "leg": "https://www.legislation.gov.uk/changes/chron-tables/private",
+  "loc": "https://www.legislation.gov.uk/changes/chron-tables/local"
+ }
+}

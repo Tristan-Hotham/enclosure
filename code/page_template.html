@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Fencing the Commons</title>
+<meta name="description" content="An interactive map of parliamentary enclosure in England and Wales: {{source.n_private|int}} private Acts and {{source.n_local|int}} local Acts that enclosed open fields, commons and wastes, placed on the map and in time, from the first wave of the 1760s and 1770s to the French war years.">
+<meta property="og:title" content="Fencing the commons: every enclosure Act in England and Wales, mapped">
+<meta property="og:description" content="{{source.n_all|int}} enclosure Acts, place by place. Two great waves, a peak of {{peaks.all_n|int}} Acts in {{peaks.all_year|raw}}, and a Midland belt where Northamptonshire passed {{counties.Northamptonshire.private|int}} while Cornwall passed {{counties.Cornwall.private|int}}.">
+<meta property="og:image" content="https://maps.tristanhotham.com/enclosure/header.png">
+<meta property="og:url" content="https://maps.tristanhotham.com/enclosure/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+/* Hedgerow: pale paper, field green, harvest gold, a hawthorn red for the war years. */
+:root{
+  --bg:#F6F3EA; --panel:#ECE7DA; --fg:#26221D; --muted:#6B655B; --rule:#DDD6C4; --card:#FFFDF7; --border:#CBC3AE;
+  --hot:#A4372A; --cool:#2C6E8F; --green:#4F7A3A; --gold:#C99A2E; --land:#E6E0D0; --sea:#E8EEEF; --other:#F1F0EC; --war:rgba(164,55,42,.10);
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#15140F; --panel:#1F1D17; --fg:#EEEAE0; --muted:#A8A192; --rule:#34312A; --card:#1A1813; --border:#4A463C;
+  --hot:#E77A68; --cool:#7DB4D2; --green:#8DBA6E; --gold:#E2B755; --land:#2A2820; --sea:#14181B; --other:#1D1C18; --war:rgba(231,122,104,.14); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15140F; --panel:#1F1D17; --fg:#EEEAE0; --muted:#A8A192; --rule:#34312A; --card:#1A1813; --border:#4A463C;
+  --hot:#E77A68; --cool:#7DB4D2; --green:#8DBA6E; --gold:#E2B755; --land:#2A2820; --sea:#14181B; --other:#1D1C18; --war:rgba(231,122,104,.14); color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.62 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+.wrap{max-width:700px;margin:0 auto;padding-block:28px 64px}
+.wrap .bleed{width:min(1180px,calc(100vw - 32px));margin-left:calc((100% - min(1180px,100vw - 32px))/2);margin-right:0}
+a{color:inherit;text-decoration-color:var(--green);text-underline-offset:3px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kicker b{background:var(--green);color:#fff;padding:5px 8px;font-weight:500}
+:root[data-theme="dark"] .kicker b{color:#15140F}
+header.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:end;border-bottom:6px double var(--fg);padding-bottom:22px;margin-top:18px}
+h1{font:900 clamp(44px,11vw,94px)/.9 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1 .a{color:var(--green)}
+.mark{width:clamp(78px,16vw,128px);height:auto;display:block;color:var(--fg)}
+.dek{grid-column:1/-1;font-size:21px;line-height:1.42;margin:8px 0 0;max-width:56ch}
+.byline{font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:14px}
+h2{font:800 34px/1.04 var(--display);letter-spacing:-.01em;margin:54px 0 10px;text-wrap:balance}
+h2 .n{font:500 13px/1 var(--mono);color:var(--green);display:block;letter-spacing:.1em;margin-bottom:10px}
+h3{font:600 20px/1.25 var(--display);margin:28px 0 6px}
+p{margin:0 0 16px}
+.lede::first-letter{font:900 72px/.8 var(--display);float:left;margin:6px 10px 0 0;color:var(--green)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0 8px}
+.stats div{background:var(--card);padding:14px 12px}
+.stats b{display:block;font:900 clamp(22px,4.4vw,32px)/1 var(--display);letter-spacing:-.01em}
+.stats b.g{color:var(--green)} .stats b.h{color:var(--hot)} .stats b.o{color:var(--gold)} .stats b.c{color:var(--cool)}
+.stats span{font:400 12px/1.35 var(--mono);color:var(--muted);display:block;margin-top:6px}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.figure{margin:26px 0 30px}
+.fig-h{font:600 19px/1.25 var(--display);margin:0 0 4px}
+.fig-sub{font:400 13px/1.45 var(--mono);color:var(--muted);margin:0 0 12px}
+.src{font:400 12px/1.45 var(--mono);color:var(--muted);margin-top:10px}
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:var(--mono);fill:var(--fg)}
+.lab{font-size:12px}.lab.m{fill:var(--muted)}.lab.b{font-weight:500}.lab.s{font-size:11px}
+.tip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);font:400 12px/1.45 var(--mono);padding:8px 10px;border-radius:3px;max-width:300px;z-index:1000;transform:translate(-50%,calc(-100% - 12px));display:none}
+.tip b{font-weight:500}
+.controls{display:flex;gap:8px;align-items:center;margin:0 0 10px;flex-wrap:wrap}
+.scrollrow{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding-bottom:2px;max-width:100%}
+.scrollrow .btn{flex:0 0 auto;white-space:nowrap}
+.ctl-l{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:2px;flex:0 0 auto;align-self:center}
+.btn{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:8px 10px;cursor:pointer;min-height:36px}
+.btn[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:1px solid rgba(0,0,0,.2)}
+.btn:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.searchbox{position:relative;flex:1 1 260px;min-width:0}
+input[type=search]{font:400 15px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:10px 11px;min-height:40px;width:100%}
+.suggest{position:absolute;left:0;right:0;top:100%;margin:2px 0 0;padding:0;list-style:none;background:var(--card);border:1px solid var(--border);z-index:1001;font:400 13px/1.3 var(--mono);display:none;max-height:340px;overflow:auto}
+.suggest li{padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--rule)}
+.suggest li span{color:var(--muted)}
+.suggest li[aria-selected="true"],.suggest li:hover{background:var(--panel)}
+.timebox{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:10px;align-items:center;margin:0 0 10px;font:500 13px/1 var(--mono)}
+.timebox .yv{font:900 30px/1 var(--display);min-width:3.2ch;text-align:center;color:var(--green)}
+.timebox .yv.war{color:var(--hot)}
+.timebox input[type=range]{width:100%;accent-color:var(--green);height:28px}
+.play{width:42px;height:38px;border-radius:3px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);font:600 15px/1 var(--mono);cursor:pointer}
+.mapgrid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:14px;align-items:start}
+@media (max-width:900px){.mapgrid{grid-template-columns:1fr}}
+.side{background:var(--card);border:1px solid var(--border);padding:12px 12px 10px;font:400 13px/1.45 var(--mono);max-height:700px;overflow:auto}
+@media (max-width:900px){.side{max-height:none}}
+.side h4{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
+.side h4:first-child{margin-top:2px}
+.side .big{font:800 26px/1.1 var(--display);margin:2px 0 4px}
+.side .sub{color:var(--muted);font-size:12px;margin:0 0 8px}
+.side ol,.side ul{margin:4px 0 8px;padding-left:20px}
+.side li{margin:3px 0}
+.side li small,.side td small{color:var(--muted)}
+.side table{width:100%;border-collapse:collapse;margin:4px 0 6px}
+.side td{padding:4px 4px 4px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.side td.num{text-align:right;white-space:nowrap}
+.side svg{display:block;width:100%;height:auto}
+.back{font:400 12px var(--mono);background:none;border:0;color:var(--muted);padding:0;cursor:pointer;text-decoration:underline;margin-bottom:6px}
+.go{cursor:pointer;text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:3px}
+#mapbox{position:relative}
+.lmap{height:680px;border:1px solid var(--border);background:var(--sea);border-radius:2px;position:relative}
+@media (max-width:600px){.lmap{height:min(66vh,520px)}}
+.maploading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 13px var(--mono);color:var(--muted);pointer-events:none;z-index:5}
+.maplibregl-map{font:400 12px/1.4 var(--mono)}
+.maplibregl-popup-content{background:var(--card);color:var(--fg);font:400 12.5px/1.45 var(--mono);padding:10px 12px;border-radius:3px;box-shadow:0 2px 10px rgba(0,0,0,.2);max-width:300px}
+.maplibregl-popup-content b.t{font:700 15px/1.2 var(--display);display:block;margin-bottom:3px}
+.maplibregl-popup-content small{color:var(--muted)}
+.maplibregl-popup-content .ti{font-style:italic;font-family:var(--body);font-size:14px;line-height:1.35;display:block;margin:4px 0}
+.maplibregl-popup-tip{border-top-color:var(--card)!important;border-bottom-color:var(--card)!important}
+.maplibregl-popup-close-button{color:var(--fg);font-size:18px;padding:0 6px}
+.maplibregl-ctrl-attrib{background:color-mix(in srgb,var(--card) 85%,transparent)!important;color:var(--muted)}
+.maplibregl-ctrl-attrib a{color:var(--fg)}
+.maplibregl-ctrl-group{background:var(--card)}
+.lyrWrap{position:absolute;top:10px;right:10px;z-index:4;display:flex;flex-direction:column;align-items:flex-end}
+.lyrBtn{background:var(--card,var(--bg));color:var(--fg);border:1px solid var(--border);border-radius:3px;font:600 12px/1 var(--mono);padding:8px 10px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.lyrBtn[aria-expanded="true"]{background:var(--fg);color:var(--bg)}
+.lyrPanel{background:var(--card,var(--bg));color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:10px 12px 8px;margin-top:6px;width:250px;box-shadow:0 2px 10px rgba(0,0,0,.15);font:400 12px/1.3 var(--mono);max-height:min(70vh,520px);overflow:auto}
+.lyrPanel[hidden]{display:none}
+.lyrPanel .row{margin:0 0 9px}
+.lyrPanel label{display:flex;gap:6px;align-items:center;cursor:pointer;font-weight:600}
+.lyrPanel input[type=range]{width:100%;accent-color:var(--fg)}
+.lyrPanel select{font:400 12px var(--mono);background:var(--bg);color:var(--fg);border:1px solid var(--border);border-radius:2px;padding:2px 4px;width:100%;min-height:0}
+.lyrPanel .sub{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:11px;margin-top:3px}
+.lyrPanel .sub span{flex:0 0 58px}
+.lyrPanel .hd{font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 7px;border-top:1px solid var(--rule);padding-top:9px}
+.lyrPanel .reset{font:400 11px var(--mono);color:var(--muted);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+#map .mfs-btn{right:auto!important;left:10px!important}
+.townL{font:500 11px/1 var(--mono);color:var(--fg);white-space:nowrap;text-shadow:0 0 3px var(--bg),0 0 3px var(--bg),0 0 2px var(--bg);pointer-events:none}
+.townL i{display:inline-block;width:5px;height:5px;background:var(--fg);margin-right:4px;vertical-align:1px}
+.townL.s{font-size:10px;font-weight:400}
+.ctyL{font:600 10.5px/1.1 var(--mono);color:var(--muted);white-space:nowrap;text-transform:uppercase;letter-spacing:.07em;text-shadow:0 0 3px var(--bg),0 0 3px var(--bg);pointer-events:none;text-align:center}
+.mapnote{position:absolute;left:10px;bottom:30px;z-index:3;background:color-mix(in srgb,var(--card) 92%,transparent);border:1px solid var(--border);border-radius:3px;padding:6px 9px;font:400 12px/1.35 var(--mono);max-width:min(300px,62vw);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.mapnote b{font-weight:600}
+.mapnote:empty{display:none}
+.legend{display:flex;gap:6px 14px;flex-wrap:wrap;font:400 12px/1.3 var(--mono);color:var(--muted);margin-top:8px;align-items:center}
+.legend span{display:inline-flex;align-items:center}
+.legend i{display:inline-block;width:13px;height:13px;margin-right:6px;border-radius:50%;border:1px solid rgba(0,0,0,.15)}
+.legend i.sq{border-radius:2px}
+.pull{font:600 26px/1.25 var(--display);border-left:6px solid var(--green);padding:4px 0 4px 18px;margin:30px 0}
+.note{background:var(--panel);border:1px solid var(--rule);padding:14px 16px;font-size:16px;margin:22px 0}
+.note h3{margin-top:0}
+table.tbl{width:100%;border-collapse:collapse;font:400 13px/1.4 var(--mono)}
+table.tbl th{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px 6px 6px 0;border-bottom:2px solid var(--fg);cursor:pointer;position:sticky;top:0;background:var(--card)}
+table.tbl td{padding:6px 6px 6px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+table.tbl td.r,table.tbl th.r{text-align:right;white-space:nowrap}
+table.tbl tr[data-i]{cursor:pointer}
+table.tbl tr[data-i]:hover td{background:var(--panel)}
+.tablebox{max-height:460px;overflow:auto;border:1px solid var(--border);background:var(--card);padding:0 10px}
+details{margin:14px 0}
+summary{font:500 13px/1.4 var(--mono);cursor:pointer;color:var(--fg);padding:8px 0}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.cta a{font:500 13px/1 var(--mono);text-decoration:none;border:1px solid var(--fg);padding:11px 14px;border-radius:3px}
+.cta a.p{background:var(--green);border-color:var(--green);color:#fff}
+footer{border-top:6px double var(--fg);margin-top:56px;padding-top:16px;font:400 13px/1.55 var(--mono);color:var(--muted)}
+footer p{margin:0 0 10px}
+.theme{position:fixed;right:12px;bottom:12px;z-index:1002}
+@media print{.theme,.controls{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="kicker"><b>Data study</b><span>History</span><span>England and Wales, 1562 to {{source.last_year|raw}}</span></div>
+<header class="hero">
+  <h1><span class="a">Fencing</span> the commons</h1>
+  <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><g id="heroMark"></g></svg>
+  <p class="dek">Every Act of Parliament that enclosed a parish's open fields, commons or wastes, as the official chronological tables list them, placed on the map and in time: {{source.n_private|int}} private Acts and {{source.n_local|int}} local Acts. Press play and watch the hedges creep out from the Midlands, then surge again in the war years, when bread was dear.</p>
+</header>
+<div class="byline">Dr Tristan Hotham · Independent researcher · 2026 · Data: legislation.gov.uk Chronological Tables (Open Government Licence v3.0); Wikidata (CC0)</div>
+
+<div class="stats">
+  <div><b class="g">{{source.n_private|int}}</b><span>private enclosure Acts, plus {{source.n_local|int}} local Acts</span></div>
+  <div><b class="h">{{peaks.all_n|int}}</b><span>enclosure Acts in {{peaks.all_year|raw}}, the busiest year, in the middle of the war with France</span></div>
+  <div><b class="o">{{eras.all.war_pct|int}}%</b><span>of all the Acts came in the {{eras.war_years|int}} war years, {{meta.war.0|raw}} to {{meta.war.1|raw}}</span></div>
+  <div><b class="c">{{counties.Northamptonshire.private|int}} : {{counties.Cornwall.private|int}}</b><span>private Acts for Northamptonshire and for Cornwall</span></div>
+</div>
+
+<p class="lede">For centuries much of lowland England was farmed in open fields: great unhedged expanses divided into strips, with each farmer's strips scattered across them, and beyond them commons and wastes where villagers grazed animals, cut turf and gathered wood. Between the 1750s and the 1830s most of what was left of that world was fenced, hedged and divided into private fields. Where the landowners of a parish could not all agree, the usual way to do it was a private Act of Parliament, which appointed commissioners to survey the parish, extinguish the common rights and allot the land.</p>
+<p>Parliament kept a record of every one of those Acts, and legislation.gov.uk publishes the list as its Chronological Tables of Private and of Local Acts. I took every title in them that mentions inclosure (the old spelling), split each into the parishes and townships it names, and found {{geo.matched|int}} of the {{geo.places|int}} named places on the map. The map below shows them appearing year by year. The colour of each dot is the decade of its Act.</p>
+
+<h2><span class="n">01 · The map</span>{{source.n_all|int}} Acts, {{geo.matched|int}} places</h2>
+<div class="bleed" id="atlas">
+<div class="timebox"><button class="play" id="play" aria-label="Play through the years">&#9654;</button><span class="yv" id="yv">1850</span><input type="range" id="yr" min="1700" max="1850" step="1" value="1850" aria-label="Year"><span id="ylab" style="color:var(--muted);font-size:12px">all Acts to here</span></div>
+<div class="controls">
+  <div class="scrollrow" id="modeRow"><span class="ctl-l">Show</span><button class="btn" data-m="cum" aria-pressed="true">All Acts to then</button><button class="btn" data-m="dec" aria-pressed="false">Ten years to then</button></div>
+  <div class="scrollrow" id="viewRow"><span class="ctl-l">Map</span><button class="btn" data-v="dots" aria-pressed="true">Places</button><button class="btn" data-v="cty" aria-pressed="false">Counties, Acts per 100 km²</button></div>
+</div>
+<div class="controls"><div class="scrollrow" id="srcRow"><span class="ctl-l">Acts</span><button class="btn" data-s="2" aria-pressed="true">Private and local</button><button class="btn" data-s="0" aria-pressed="false">Private only</button><button class="btn" data-s="1" aria-pressed="false">Local only</button></div></div>
+<div class="controls">
+  <div class="searchbox"><input type="search" id="q" placeholder="Search a parish, a county or a word in a title (Elsdon, Norfolk, Forest...)" aria-label="Search a parish, a county or a word in an Act's title" autocomplete="off"><ul class="suggest" id="sug" role="listbox"></ul></div>
+</div>
+<div class="controls"><div class="scrollrow" id="focusRow"><span class="ctl-l">Zoom to</span></div></div>
+<div class="mapgrid">
+  <div id="mapbox"><div id="map" class="lmap" role="application" aria-label="Map of England and Wales with a dot for every place named in an enclosure Act, coloured by decade" data-fullscreen-map><div class="maploading" id="loading">Loading the map...</div></div><div class="mapnote" id="mapnote"></div>
+    <div class="legend" id="legend"></div></div>
+  <div class="side" id="side" aria-live="polite"></div>
+</div>
+<p class="src">Dots: places named in enclosure Acts and found in the Wikidata gazetteer, one per place, so an Act naming three townships has three dots; coloured by the decade of the Act (the first calendar year of its parliamentary session). Rings: places named in local Acts. Counties view: Acts per 100 km² of each historic county to the chosen year, by the first county each Act names; county shapes are rebuilt from Wikidata places and are approximate. Source: Chronological Tables of Private and of Local Acts, legislation.gov.uk, Open Government Licence v3.0; Wikidata (CC0). Hillshade tiles © Esri.</p>
+</div>
+
+<h2><span class="n">02 · Two waves</span>The 1770s, and the war years</h2>
+<p>A handful of Acts touch enclosure before 1750: the very first title in the tables, from {{first.year|raw}}, is for draining and enclosing Plumstead Marsh on the Thames in Kent, and there are {{first.n_before1750|int}} enclosure Acts in all before 1750. Then the numbers take off. The first wave ran through the 1760s and 1770s: {{peaks.y1760_79|int}} private Acts in twenty years, about {{peaks.y1760_79_per_year|f1}} a year, peaking at {{peaks.first_wave_n|int}} in {{peaks.first_wave_year|raw}}. The 1780s, during and after the American war, brought a lull, down to {{peaks.trough_n|int}} Acts in {{peaks.trough_year|raw}}.</p>
+<div class="figure"><p class="fig-h">Enclosure Acts per year, 1700 to 1849</p><p class="fig-sub">Private Acts (green) and local Acts (gold), by the first calendar year of each parliamentary session. Shaded: Britain at war with France, {{meta.war.0|raw}} to {{meta.war.1|raw}}. Local Acts for 1802 and 1803 were not collected. Hover or tap a year.</p><div class="chart" id="yearChart"></div><div class="legend" id="yearLegend"></div></div>
+<p>The second wave came with the wars against Revolutionary and Napoleonic France, which began in {{meta.war.0|raw}} and ended in {{meta.war.1|raw}}. Imports were disrupted, harvests failed in several years, and wheat prices soared; turning commons and open fields into enclosed farmland suddenly paid. In those {{eras.war_years|int}} years Parliament passed {{peaks.y1793_1815_all|int}} enclosure Acts, about {{peaks.y1793_1815_per_year|f1}} a year: {{peaks.y1793_1815_private|int}} private Acts and {{peaks.y1793_1815_local|int}} local ones. The private Acts peaked at {{peaks.private_n|int}} in {{peaks.private_year|raw}}; counting both tables, the busiest year was {{peaks.all_year|raw}}, with {{peaks.all_n|int}}. When peace came the boom ended at once: {{peaks.y1814|int}} Acts in 1814, {{peaks.y1815|int}} in 1815, {{peaks.y1816|int}} in 1816.</p>
+<p class="pull">{{eras.all.war_pct|int}}% of all the enclosure Acts in the tables were passed in the {{eras.war_years|int}} years of war with France.</p>
+<div class="note"><h3>Why two tables?</h3><p>Up to the late 1790s enclosure Acts were private Acts. The Chronological Table of Local Acts begins in 1797, and from {{peaks.local_first|raw}} more and more enclosure Acts appear there instead: {{peaks.local_1798_1815|int}} of them by 1815, and in 1811 to 1814 about half ({{peaks.local_share_1811_14|int}}%) of all the enclosure Acts in the two tables. So the fall in private Acts after 1801 is partly an accounting change, and the two have to be added together to see the real second wave. I keep them apart in every count. Two pages of the local table, for 1802 to 1803 and for 1841, could not be collected, so the local counts for those years are missing.</p></div>
+<div class="figure"><p class="fig-h">Before, during and after the wars</p><p class="fig-sub">Share of each table's enclosure Acts passed before {{meta.war.0|raw}}, in the war years and after {{meta.war.1|raw}}. Hover a block.</p><div class="chart" id="eraChart"></div></div>
+
+<h2><span class="n">03 · Where</span>The Midland belt</h2>
+<p>Enclosure by Act was concentrated in a broad band across the middle of England. Northamptonshire had more enclosure Acts for its size than any other county: {{counties.Northamptonshire.private|int}} private Acts, {{counties.Northamptonshire.per100_private|f1}} for every 100 km². Leicestershire ({{counties.Leicestershire.per100_private|f1}}), Rutland ({{counties.Rutland.per100_private|f1}}), Huntingdonshire, Nottinghamshire, Warwickshire, Bedfordshire, Oxfordshire, Worcestershire and Buckinghamshire follow. These are the heavy-soiled open-field counties where the old common-field system survived longest. Taken together, twelve Midland and East Midland counties cover {{belt.area_pct|int}}% of England but account for {{belt.acts_pct|int}}% of its private enclosure Acts, about {{belt.per100|f1}} per 100 km² against {{belt.eng_per100|f1}} for England as a whole.</p>
+<div class="figure"><p class="fig-h">Enclosure Acts per 100 km², by historic county</p><p class="fig-sub">Private Acts by the first county named in each title, divided by the area of the historic county. Click a bar to see the county on the map.</p><div class="chart" id="ctyChart"></div></div>
+<p>At the other end are counties that were enclosed early, by private agreement between landowners or piece by piece, long before Parliament became involved, or where open fields had never covered much ground. Kent had {{counties.Kent.private|int}} private Acts ({{light.Kent.per100|f2}} per 100 km², {{light.Kent.rank|int}}th of {{n_counties|int}} counties), Devon {{counties.Devon.private|int}} ({{light.Devon.rank|int}}rd) and Cornwall just {{counties.Cornwall.private|int}}, last of all. Essex and Sussex are low too. In Wales, enclosure by Act came late and was mostly about common hill land: {{wales.private|int}} private and {{wales.all|int}} Acts in all, {{wales.war_pct|int}}% of the private ones in the war years.</p>
+<div class="figure"><p class="fig-h">Every county</p><p class="fig-sub">Private and local Acts, density, first and last year, and the share before and during the wars. Click a heading to sort, a row to see the county on the map.</p><div class="tablebox"><table class="tbl" id="ctyTable"></table></div></div>
+
+<h2><span class="n">04 · The second wave</span>South, west and into Wales</h2>
+<p>The war-years boom did not simply repeat the first wave. In 1750 to 1779 more than half ({{waves.w1.belt_pct|int}}%) of all enclosure Acts were for the twelve Midland belt counties; in {{meta.war.0|raw}} to {{meta.war.1|raw}} that share fell to {{waves.war.belt_pct|int}}%. What grew was everywhere else: Norfolk and Suffolk went from {{waves.w1.eastanglia_pct|int}}% of Acts to {{waves.war.eastanglia_pct|int}}%, the south-west and the Welsh border counties from {{waves.w1.southwest_pct|int}}% to {{waves.war.southwest_pct|int}}%, the home counties and Kent from {{waves.w1.southeast_pct|int}}% to {{waves.war.southeast_pct|int}}%, and Wales from almost nothing to {{waves.war.wales_pct|f1}}%. The share of Acts for places west of 2°W, roughly a line from Lancashire through Shropshire to Dorset, doubled from {{waves.w1.west_pct|int}}% to {{waves.war.west_pct|int}}%. One thing did not grow: the north. Yorkshire, Durham and the northern counties took {{waves.w1.north_pct|int}}% of the first wave's Acts and {{waves.war.north_pct|int}}% of the second's.</p>
+<div class="figure"><p class="fig-h">Where each wave fell</p><p class="fig-sub">Share of each period's enclosure Acts by region (private and local, by the county named first). Hover a bar.</p><div class="chart" id="waveChart"></div></div>
+<p>Historians have long described the war-years enclosures as reaching beyond the old open fields to commons, heaths and wastes, the poorer land that only high prices made worth fencing. The Act titles mostly cannot test that: almost all simply say "inclosure", and only {{wording.waste_pct|int}}% name a common, moor, heath, fen or forest. The map can show where, though. Watch East Anglia: Norfolk's light sands and heaths filled with the teal and blue dots of the 1800s and 1810s ({{counties.Norfolk.war_pct|int}}% of its Acts came in the war years), and Norfolk ended with {{counties.Norfolk.all|int}} Acts, third only to Yorkshire and Lincolnshire.</p>
+
+<h2><span class="n">05 · A moving centre</span>From Nottingham to Leicester and on</h2>
+<p>Average the positions of each decade's Acts and you get a centre of gravity for enclosure. In the 1760s it sat near {{centroid.2.near|raw}}, on the edge of Nottingham, pulled north by the many Acts in Yorkshire and Lincolnshire. By the 1810s it had moved about {{centroid_move.km|int}} km, to the country west of Leicester, near {{centroid.7.near|raw}}, as the second wave spread south and west. By the 1830s and 1840s it lay near Rugby. It never left the East Midlands, because enclosure by Act was always an English lowland affair.</p>
+<div class="figure"><p class="fig-h">The centre of enclosure, decade by decade</p><p class="fig-sub">Mean position of the located Acts of each decade (each Act counted once at the average of its places). Hover a point.</p><div class="chart" id="cenChart"></div></div>
+
+<h2><span class="n">06 · Odd and striking</span>Marshes, ten townships, and places enclosed again</h2>
+<p><b>The first.</b> The earliest title in the private table that mentions enclosure is the {{first.year|raw}} Act for Plumstead Marsh in Kent, on the Thames below London, about draining and embanking a marsh more than parcelling out a village; there are {{plumstead.n|int}} Plumstead Marsh Acts in all. The classic form, "Place (County) inclosure", starts to appear in the early 1700s, with Ropley Commons in Hampshire in 1709.</p>
+<p><b>The last.</b> After the General Inclosure Act of 1845, enclosure moved to the Inclosure Commissioners, whose awards were confirmed in bulk by general Acts that these tables do not list one by one. The last private enclosure Act in the table is for Terrington in Norfolk, in {{last.year|raw}}; the last local one, for Gedney in Lincolnshire, came in {{last.local_year|raw}}.</p>
+<p><b>The biggest.</b> Most Acts name a single parish; {{multi.n_multi|int}} name more than one place. The longest list is the {{biggest.year|raw}} Act for {{biggest.n_places|int}} places in Staffordshire: Over Stonnall and Lynn, Nether Stonnall and Thornes, Shenstone, Woodend, Footherley, Little Hay, Chesterfield and Little Aston, around Lichfield.</p>
+<p><b>Enclosed again.</b> {{twice.n|int}} places are named in enclosure Acts of two or more different years. Usually that means a parish whose open fields were enclosed first and its commons later, or a large upland parish enclosed common by common. Elsdon in Northumberland appears in Acts of 1728, 1769, 1805 and 1807; Simonburn, Chatteris and Rothbury in four Acts each. The longest gap is at Eccleshall in Staffordshire: Gratwood Heath in 1719, and an Act for the parish again in 1841, {{twice_gap.0.gap|int}} years later.</p>
+<div class="figure"><p class="fig-h">Enclosed again and again</p><p class="fig-sub">Places named in the most enclosure Acts, and the longest gaps. Each dot is an Act. Click a name to see it on the map.</p><div class="chart" id="twiceChart"></div></div>
+
+<h2><span class="n">07 · Gain and loss</span>Who won from the hedges</h2>
+<p>Enclosure has been argued over ever since. Its defenders, then and now, point to output: enclosed land could be drained, consolidated, sown with new crops or turned to pasture without the agreement of a whole village, and studies from J. D. Chambers and G. E. Mingay's <i>The Agricultural Revolution 1750 to 1880</i> (1966) to Michael Turner's <i>English Parliamentary Enclosure</i> (1980) found that farm output and rents rose where it happened. Turner estimated that Acts of Parliament enclosed about a fifth of England. Robert Allen, in <i>Enclosure and the Yeoman</i> (1992), argued that the productivity gains were smaller than claimed and that most of the extra income went to landowners as higher rents.</p>
+<p>The critics point to who lost. J. L. and Barbara Hammond's <i>The Village Labourer</i> (1911) and, in far more detail, J. M. Neeson's <i>Commoners</i> (1993) showed what common rights were worth to the poor: grazing for a cow or geese, fuel, gleaning after harvest, the margin that let a labouring family get by. The commissioners allotted land to those who could prove a legal right; many cottagers who had used the commons by custom got nothing, or a plot too small to keep a cow on and too costly to fence. Both views can be true at once: more food from the same land, and a great deal of it taken from people with the least.</p>
+
+<h2><span class="n">08 · How I did this</span>Methods and caveats</h2>
+<p><b>Data.</b> The Chronological Table of Private and Personal Acts on legislation.gov.uk, parts 1 to 33 ({{source.private_rows|int}} rows on {{source.private_pages|int}} pages), and the Chronological Table of Local Acts ({{source.local_pages|int}} of its {{source.local_pages_total|int}} pages; the parts for 1802 to 1803 and for 1841 could not be collected, and only rows mentioning inclosure were kept). I rejoined titles that run over two rows, dropped the annotation rows that record later repeals and amendments, and dated every Act by the first calendar year of its session. Every title containing a word starting "inclos" or "enclos" was kept: {{source.n_private_mentions|int}} private and {{source.n_local_mentions|int}} local. An enclosure Act here is one whose title enacts or confirms an enclosure, including drainage and enclosure, enclosure with tithe exchange and the confirmation of an enclosure already agreed ({{source.agree_private|int}} private Acts). I set apart {{source.amend_private|int}} Acts that only amend or explain an earlier one, {{source.orders_local|int}} later Acts confirming the Inclosure Commissioners' orders, a few titles that mention enclosing only in passing, and {{source.ireland|int}} Acts for Irish counties.</p>
+<p><b>What this is not.</b> W. E. Tate's county-by-county list, published as <i>A Domesday of English Enclosure Acts and Awards</i> in 1978, remains the standard reference, and this study does not replace it. This is a count of Acts as the chronological tables list them, not of all enclosure. The total usually quoted for England, more than 5,000 Acts, comes from Tate's and Turner's work and also takes in public local Acts and the enclosures completed after 1845 by the Inclosure Commissioners, whose awards were confirmed by general Acts that are not itemised here. Enclosure by agreement without an Act, which covered much of England before 1750, does not appear at all. {{source.allotment_only|int}} private Acts that speak only of "allotment" or "dividing" and never use the word inclosure are also left out.</p>
+<p><b>Places.</b> Each title was split into the places it names ("Great and Little Cressingham" becomes two places). I matched them to a Wikidata gazetteer of about {{geo.gaz_ew|int}} places in England and Wales, within the county the title names, allowing for old spellings, Saint and St, "upon" and "on", and pieces of land named within a parish ("Glusburn Moor in Kildwick" becomes Kildwick). {{geo.matched|int}} of {{geo.places|int}} named places ({{geo.rate|int}}%) were found, {{geo.private.rate|int}}% for private Acts and {{geo.local.rate|int}}% for local Acts, whose titles rarely give a county; {{geo.acts_located|int}} Acts ({{geo.acts_rate|int}}%) have at least one place on the map. Wales matches less well ({{geo.wales_rate|int}}%) because of spelling. A name with two candidates in one county was accepted only if another place in the same Act settled it; nothing else was guessed, and every unmatched place is listed in the data files.</p>
+<p><b>Counties.</b> An Act counts for the first county its title names (for Acts without one, the county of its first located place). Yorkshire is one county here. There is no historic county boundary file among my sources, so the county shapes and areas are rebuilt from the gazetteer: each place gets the area closest to it, and the areas are merged by historic county and clipped to the coast. They match the real historic counties closely but not exactly.</p>
+<details><summary>Sources and licences</summary>
+<ul>
+<li>Chronological Tables of Private and Personal Acts and of Local Acts, legislation.gov.uk. Crown copyright, Open Government Licence v3.0.</li>
+<li>Wikidata places in the United Kingdom with coordinates and historic county (CC0).</li>
+<li>Coastline: modern county outlines of the United Kingdom; Natural Earth (public domain) for neighbouring land.</li>
+<li>Hillshade tiles © Esri.</li>
+<li>Historiography: W. E. Tate, <i>A Domesday of English Enclosure Acts and Awards</i> (ed. M. E. Turner, 1978); M. Turner, <i>English Parliamentary Enclosure</i> (1980); J. D. Chambers and G. E. Mingay, <i>The Agricultural Revolution 1750 to 1880</i> (1966); R. C. Allen, <i>Enclosure and the Yeoman</i> (1992); J. L. and B. Hammond, <i>The Village Labourer</i> (1911); J. M. Neeson, <i>Commoners</i> (1993).</li>
+</ul></details>
+
+<div class="cta"><a class="p" href="https://doi.org/10.5281/zenodo.23873003">Read the paper</a><a href="https://github.com/Tristan-Hotham/enclosure">Data and code</a><a href="https://blog.tristanhotham.com/2026/10/31/enclosure/">Blog post</a></div>
+
+<footer>
+<p>Dr Tristan Hotham, Independent researcher. ORCID <a href="https://orcid.org/0000-0003-4931-9349">0000-0003-4931-9349</a>.</p>
+<p>Cite as: Hotham, T. (2026) Fencing the commons: mapping parliamentary enclosure in England and Wales from the Chronological Tables of Acts. Zenodo. <a href="https://doi.org/10.5281/zenodo.23873003">https://doi.org/10.5281/zenodo.23873003</a></p>
+<p>Data: legislation.gov.uk (Open Government Licence v3.0); Wikidata (CC0). Licence: derived data and text CC BY 4.0, code MIT.</p>
+<p>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</p>
+</footer>
+</div>
+<div class="tip" id="tip"></div>
+<button class="btn theme" id="theme" aria-label="Toggle dark mode">◐</button>
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+const R = /*RESULTS*/;
+const SITE = /*SITE*/;
+const EW = /*EW*/;
+const CTY = /*COUNTIES*/;
+const fmt = n => n == null || n === "" ? "n/a" : Math.round(n).toLocaleString("en-GB");
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const tip = document.getElementById("tip");
+function showTip(h, x, y) { tip.innerHTML = h; tip.style.display = "block"; const w = tip.offsetWidth; x = Math.max(w / 2 + 8, Math.min(innerWidth - w / 2 - 8, x)); tip.style.left = x + scrollX + "px"; tip.style.top = y + scrollY + "px"; }
+function hideTip() { tip.style.display = "none"; }
+document.addEventListener("click", hideTip);
+const NS = "http://www.w3.org/2000/svg";
+const el = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const lbl = (svg, x, y, s, cls = "lab", anchor = "start") => { const t = el("text", { x, y, class: cls, "text-anchor": anchor }, svg); t.textContent = s; return t; };
+const redraws = [];
+function resp(box, render) { let last = 0; const go = force => { const w = Math.max(280, Math.round(box.clientWidth)); if (!force && Math.abs(w - last) < 4) return; last = w; box.innerHTML = ""; render(w, w < 560); }; new ResizeObserver(() => go()).observe(box); go(); redraws.push(() => go(true)); }
+const isDark = () => { const r = document.documentElement; return r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const small = () => innerWidth < 900;
+const DEC = SITE.decades, DCOL = SITE.dec_col, WAR = R.meta.war, YMIN = 1700, YMAX = 1850;
+const decBin = y => y < 1720 ? 0 : y >= 1840 ? DEC.length - 1 : 1 + Math.floor((y - 1720) / 10);
+const CNAME = c => c === "County Durham" ? "Durham" : c;
+const AREA = {}; CTY.features.forEach(f => AREA[f.properties.county] = f.properties.area_km2);
+const BOUNDS = [0, .5, 1, 2, 3, 4, 5, 6, 8], CRAMP = ["#F3EEDC", "#E2DCB4", "#C5C68D", "#A3B56B", "#7E9F50", "#5E8540", "#416A30", "#24431E"];
+const cCol = v => { let k = 0; while (k < BOUNDS.length - 2 && v >= BOUNDS[k + 1]) k++; return CRAMP[k]; };
+
+/* hero mark: a field hedge with a gate */
+(function () {
+  const g = document.getElementById("heroMark");
+  el("path", { d: "M8 96 Q60 90 112 96", stroke: "currentColor", "stroke-width": 3, fill: "none" }, g);
+  [[14, 20], [30, 26], [46, 18], [62, 28], [78, 22], [94, 25], [108, 19]].forEach(([x, r]) => el("circle", { cx: x, cy: 78 - r / 3, r: r / 2.2, fill: "#4F7A3A", opacity: .85 }, g));
+  for (const x of [20, 44, 68, 92]) el("line", { x1: x, x2: x, y1: 64, y2: 98, stroke: "currentColor", "stroke-width": 3 }, g);
+  for (const y of [72, 84]) el("line", { x1: 20, x2: 92, y1: y, y2: y, stroke: "currentColor", "stroke-width": 2.4 }, g);
+  el("line", { x1: 20, x2: 44, y1: 84, y2: 72, stroke: "#A4372A", "stroke-width": 2.4 }, g);
+  el("circle", { cx: 100, cy: 30, r: 7, fill: "#C99A2E" }, g);
+})();
+
+/* ---------- state ---------- */
+const S = { y: YMAX, mode: "cum", view: "dots", src: 2, sel: null, play: null };
+let J = null, map = null, ready = false;
+function windowOf() { const hi = S.y >= YMAX ? 3000 : S.y; return S.mode === "cum" ? [1500, hi] : [S.y - 9, hi]; }
+const winTxt = () => S.y >= YMAX ? (S.mode === "cum" ? "in all" : `from ${S.y - 9}`) : S.mode === "cum" ? `to ${S.y}` : `${S.y - 9} to ${S.y}`;
+const srcOK = l => S.src === 2 || S.src === l;
+
+/* ---------- map ---------- */
+const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services/";
+const LYDEF = { hills: false, hillK: 45, towns: true, cnames: false, counties: true, size: 3, local: true };
+const LY = { ...LYDEF };
+try { Object.assign(LY, JSON.parse(localStorage.getItem("encl_layers") || "{}")); } catch (e) {}
+const saveLY = () => { try { localStorage.setItem("encl_layers", JSON.stringify(LY)); } catch (e) {} };
+const HOME = () => small() ? { center: [-2.3, 53.0], zoom: 4.75 } : { center: [-2.0, 52.85], zoom: 5.75 };
+function colours() { return { sea: css("--sea"), land: css("--land"), border: css("--border"), fg: css("--fg"), bg: css("--bg"), other: css("--other") }; }
+function colorExpr() { const e = ["match", ["get", "d"]]; DCOL.forEach((c, i) => e.push(i, c)); e.push("#888"); return e; }
+function radiusExpr(k = 1) { const s = LY.size / 3 * k; return ["interpolate", ["linear"], ["zoom"], 4, 1.7 * s, 6, 2.7 * s, 8, 4.2 * s, 11, 7 * s]; }
+function baseStyle() {
+  const c = colours();
+  return { version: 8,
+    sources: { ew: { type: "geojson", data: EW }, cty: { type: "geojson", data: CTY, promoteId: "county" },
+      hills: { type: "raster", tiles: [ESRI + "Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}"], tileSize: 256, maxzoom: 16, attribution: "Hillshade: Esri, USGS, NASA, CGIAR" },
+      pts: { type: "geojson", data: { type: "FeatureCollection", features: [] } } },
+    layers: [
+      { id: "bg", type: "background", paint: { "background-color": c.sea } },
+      { id: "land", type: "fill", source: "ew", paint: { "fill-color": c.land } },
+      { id: "choro", type: "fill", source: "cty", layout: { visibility: "none" }, paint: { "fill-color": ["coalesce", ["feature-state", "col"], c.land], "fill-opacity": .95 } },
+      { id: "hills", type: "raster", source: "hills", layout: { visibility: "none" }, paint: { "raster-opacity": .45 } },
+      { id: "ctyline", type: "line", source: "cty", paint: { "line-color": isDark() ? "rgba(255,255,255,.18)" : "#FFFFFF", "line-width": ["interpolate", ["linear"], ["zoom"], 5, .7, 9, 1.6] } },
+      { id: "ctysel", type: "line", source: "cty", filter: ["==", ["get", "county"], ""], paint: { "line-color": c.fg, "line-width": 2.2 } },
+      { id: "coast", type: "line", source: "ew", paint: { "line-color": c.border, "line-width": .6 } },
+      { id: "dots", type: "circle", source: "pts", paint: { "circle-radius": radiusExpr(), "circle-color": colorExpr(), "circle-opacity": .9, "circle-stroke-color": isDark() ? "rgba(0,0,0,.5)" : "rgba(255,255,255,.7)", "circle-stroke-width": ["interpolate", ["linear"], ["zoom"], 5, .25, 9, .8] } },
+      { id: "ring", type: "circle", source: "pts", paint: { "circle-radius": radiusExpr(1.55), "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": c.fg, "circle-stroke-width": .8, "circle-stroke-opacity": .4 } },
+      { id: "selpt", type: "circle", source: "pts", filter: ["==", ["get", "a"], -1], paint: { "circle-radius": radiusExpr(2.3), "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": c.fg, "circle-stroke-width": 2 } }
+    ] };
+}
+function feats() {
+  const f = J.points.map((p, i) => ({ type: "Feature", id: i, geometry: { type: "Point", coordinates: [p[0], p[1]] }, properties: { y: p[2], a: p[3], d: decBin(p[2]), l: J.acts[p[3]][5] } }));
+  return { type: "FeatureCollection", features: f };
+}
+function applyFilters() {
+  if (!ready) return;
+  const [lo, hi] = windowOf(), base = ["all", [">=", ["get", "y"], lo], ["<=", ["get", "y"], hi]];
+  if (S.src !== 2) base.push(["==", ["get", "l"], S.src]);
+  map.setFilter("dots", base);
+  map.setFilter("ring", LY.local ? [...base, ["==", ["get", "l"], 1]] : ["==", ["get", "l"], 9]);
+  map.setFilter("selpt", S.sel && S.sel.t === "act" ? ["==", ["get", "a"], S.sel.i] : ["==", ["get", "a"], -1]);
+  map.setFilter("ctysel", ["==", ["get", "county"], S.sel && S.sel.t === "cty" ? S.sel.c : ""]);
+  const dotsOn = S.view === "dots";
+  vis("dots", true); map.setPaintProperty("dots", "circle-opacity", dotsOn ? .9 : .0); map.setPaintProperty("dots", "circle-stroke-width", dotsOn ? ["interpolate", ["linear"], ["zoom"], 5, .25, 9, .8] : 0);
+  vis("ring", dotsOn && LY.local); vis("choro", !dotsOn);
+  if (!dotsOn) { const D = density(); CTY.features.forEach(f => map.setFeatureState({ source: "cty", id: f.properties.county }, { col: cCol(D[f.properties.county].per100) })); }
+}
+function vis(id, on) { if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", on ? "visible" : "none"); }
+function applyLayers() {
+  if (!ready) return;
+  const c = colours();
+  map.setPaintProperty("bg", "background-color", c.sea); map.setPaintProperty("land", "fill-color", c.land); map.setPaintProperty("coast", "line-color", c.border);
+  map.setPaintProperty("ctyline", "line-color", isDark() ? "rgba(255,255,255,.18)" : "#FFFFFF"); map.setPaintProperty("ctysel", "line-color", c.fg);
+  map.setPaintProperty("ring", "circle-stroke-color", c.fg); map.setPaintProperty("selpt", "circle-stroke-color", c.fg);
+  map.setPaintProperty("dots", "circle-stroke-color", isDark() ? "rgba(0,0,0,.5)" : "rgba(255,255,255,.7)");
+  vis("hills", LY.hills); map.setPaintProperty("hills", "raster-opacity", Math.min(1, LY.hillK / 100)); vis("ctyline", LY.counties);
+  ["dots", "ring", "selpt"].forEach((id, k) => map.setPaintProperty(id, "circle-radius", radiusExpr([1, 1.55, 2.3][k])));
+  applyFilters(); placeNames();
+}
+/* place names: our own labels (no glyph server needed), placed without overlaps */
+let nameMarkers = [];
+function placeNames() {
+  nameMarkers.forEach(m => m.remove()); nameMarkers = [];
+  if (!ready) return;
+  const z = map.getZoom(), b = map.getBounds(), bxs = [];
+  const box = (p, w, h, dx = 0, dy = 0) => [p.x + dx, p.y + dy, p.x + dx + w, p.y + dy + h];
+  const hit = (bx) => bxs.some(o => bx[0] < o[2] && bx[2] > o[0] && bx[1] < o[3] && bx[3] > o[1]);
+  if (LY.cnames) CTY.features.forEach(f => { const p = f.properties; if (!b.contains([p.lx, p.ly])) return; if (z < 6 && p.area_km2 < 1500) return;
+    const nm = CNAME(p.county), w = nm.length * 7.2, pt = map.project([p.lx, p.ly]), bx = box(pt, w, 13, -w / 2, -6); if (hit(bx)) return; bxs.push(bx);
+    const d = document.createElement("div"); d.className = "ctyL"; d.textContent = nm; nameMarkers.push(new maplibregl.Marker({ element: d, anchor: "center" }).setLngLat([p.lx, p.ly]).addTo(map)); });
+  if (LY.towns) { let n = 0; const minRank = z < 6 ? 2 : z < 7 ? 1 : 0;
+    for (const t of SITE.towns) { if (t.rank < minRank || !b.contains([t.lon, t.lat])) continue;
+      const big = t.rank >= 1, pt = map.project([t.lon, t.lat]), w = 12 + t.name.length * (big ? 6.9 : 6.2), bx = box(pt, w, 14, -3, -7); if (hit(bx)) continue; bxs.push(bx);
+      const d = document.createElement("div"); d.className = "townL" + (big ? "" : " s"); d.innerHTML = `<i></i>${esc(t.name)}`;
+      nameMarkers.push(new maplibregl.Marker({ element: d, anchor: "left", offset: [-3, 0] }).setLngLat([t.lon, t.lat]).addTo(map)); if (++n > 70) break; } }
+}
+let syncLayers = () => {};
+function layerPanel() {
+  const box = document.createElement("div"); box.className = "lyrWrap";
+  box.innerHTML = `<button class="lyrBtn" aria-expanded="false">Map layers</button>
+<div class="lyrPanel" hidden>
+ <div class="row"><label><input type="checkbox" data-k="towns"> Place names</label></div>
+ <div class="row"><label><input type="checkbox" data-k="counties"> Historic counties</label></div>
+ <div class="row"><label><input type="checkbox" data-k="cnames"> County names</label></div>
+ <div class="row"><label><input type="checkbox" data-k="hills"> Relief (hill shading)</label><div class="sub"><span>strength</span><input type="range" data-k="hillK" min="10" max="100" step="5" aria-label="Relief strength"></div></div>
+ <div class="hd">Enclosures</div>
+ <div class="row"><label><input type="checkbox" data-k="local"> Ring the local Acts</label></div>
+ <div class="row"><label style="font-weight:600">Dot size</label><div class="sub"><span>size</span><input type="range" data-k="size" min="1.5" max="6" step=".5" aria-label="Dot size"></div></div>
+ <button class="reset">Reset layers</button>
+</div>`;
+  document.getElementById("map").appendChild(box);
+  ["click", "dblclick", "mousedown", "touchstart", "wheel"].forEach(t => box.addEventListener(t, e => e.stopPropagation(), { passive: t !== "click" }));
+  const btn = box.querySelector(".lyrBtn"), pan = box.querySelector(".lyrPanel");
+  btn.onclick = () => { const o = pan.hidden; pan.hidden = !o; btn.setAttribute("aria-expanded", o); };
+  const sync = () => pan.querySelectorAll("[data-k]").forEach(i => { const k = i.dataset.k; if (i.type === "checkbox") i.checked = LY[k]; else i.value = LY[k]; });
+  pan.querySelectorAll("[data-k]").forEach(i => i.addEventListener(i.type === "range" ? "input" : "change", () => {
+    const k = i.dataset.k; LY[k] = i.type === "checkbox" ? i.checked : +i.value; if (k === "hillK") LY.hills = true;
+    sync(); saveLY(); applyLayers(); legend(); }));
+  pan.querySelector(".reset").onclick = () => { Object.assign(LY, LYDEF); saveLY(); sync(); applyLayers(); legend(); };
+  sync(); syncLayers = sync;
+}
+function note(h) { document.getElementById("mapnote").innerHTML = h || ""; }
+
+/* ---------- counts for the window ---------- */
+function density() {
+  const [lo, hi] = windowOf(), D = {}; Object.keys(AREA).forEach(c => D[c] = { n: 0, p: 0, l: 0 });
+  J.acts.forEach(a => { if (a[0] < lo || a[0] > hi || !srcOK(a[5]) || !D[a[4]]) return; D[a[4]].n++; a[5] ? D[a[4]].l++ : D[a[4]].p++; });
+  for (const c in D) D[c].per100 = 100 * D[c].n / AREA[c];
+  return D;
+}
+function counts() {
+  const [lo, hi] = windowOf(); let n = 0, p = 0, l = 0, pl = 0; const dec = new Array(DEC.length).fill(0);
+  J.acts.forEach(a => { if (a[0] < lo || a[0] > hi || !srcOK(a[5])) return; n++; a[5] ? l++ : p++; });
+  J.points.forEach(q => { if (q[2] < lo || q[2] > hi || !srcOK(J.acts[q[3]][5])) return; pl++; dec[decBin(q[2])]++; });
+  return { n, p, l, pl, dec };
+}
+
+/* ---------- popups and side panel ---------- */
+let popup = null;
+const actRef = a => `${esc(a[1] || a[0])}, c. ${esc(a[2])}`;
+function actHTML(i, place) {
+  const a = J.acts[i]; const war = a[0] >= WAR[0] && a[0] <= WAR[1];
+  return `<b class="t">${esc(place || a[3])}</b><span class="ti">${esc(a[3])}</span>${actRef(a)}<br>${a[5] ? "Local Act" : "Private Act"}${a[7] ? ", confirming an agreement" : ""}${a[4] ? ` · ${esc(CNAME(a[4]))}` : ""}<br><small>${a[6] > 1 ? `${a[6]} places named` : "one place named"}${war ? " · in the war years" : ""}</small>`;
+}
+function placeName(s) { const [a, b] = String(s).split("|"); return b ? `${a} <small>(${b})</small>` : a; }
+function openPoint(k, fly) {
+  const p = J.points[k]; if (!p) return; if (popup) popup.remove();
+  if (fly) map.flyTo({ center: [p[0], p[1]], zoom: Math.max(map.getZoom(), 9), speed: 1.6 });
+  S.sel = { t: "act", i: p[3] }; applyFilters();
+  popup = new maplibregl.Popup({ maxWidth: "300px", offset: 8, focusAfterOpen: false }).setLngLat([p[0], p[1]]).setHTML(actHTML(p[3], "").replace(/<b class="t">.*?<\/b>/, `<b class="t">${placeName(esc(p[4]))}</b>`)).addTo(map);
+  popup.on("close", () => { if (S.sel && S.sel.t === "act") { S.sel = null; applyFilters(); side(); } });
+  side();
+}
+function spark(c) {
+  const w = 300, h = 70, Y = new Map(); let mx = 1;
+  J.acts.forEach(a => { if (a[4] !== c || !srcOK(a[5]) || a[0] < YMIN || a[0] >= YMAX) return; const v = (Y.get(a[0]) || 0) + 1; Y.set(a[0], v); if (v > mx) mx = v; });
+  const bw = w / (YMAX - YMIN); let s = `<svg viewBox="0 0 ${w} ${h + 14}" role="img" aria-label="Acts per year"><rect x="${(WAR[0] - YMIN) * bw}" y="0" width="${(WAR[1] - WAR[0] + 1) * bw}" height="${h}" fill="var(--war)"/>`;
+  for (const [y, v] of Y) s += `<rect x="${(y - YMIN) * bw}" y="${h - h * v / mx}" width="${Math.max(1, bw - .3)}" height="${h * v / mx}" fill="${DCOL[decBin(y)]}"/>`;
+  s += `<line x1="${(S.y - YMIN + .5) * bw}" x2="${(S.y - YMIN + .5) * bw}" y1="0" y2="${h}" stroke="var(--muted)" stroke-dasharray="2 2"/>`;
+  [1700, 1750, 1800].forEach(y => s += `<text x="${(y - YMIN) * bw}" y="${h + 12}" class="lab s m">${y}</text>`);
+  return s + `<text x="2" y="10" class="lab s m">most in a year: ${mx}</text></svg>`;
+}
+function side() {
+  const box = document.getElementById("side"); if (!J) { box.innerHTML = `<p class="sub">Loading the Acts...</p>`; return; }
+  let h = "";
+  if (S.sel && S.sel.t === "cty") {
+    const c = S.sel.c, r = R.counties[c], D = density()[c];
+    const list = J.acts.map((a, i) => [a, i]).filter(([a]) => a[4] === c && srcOK(a[5]));
+    h = `<button class="back">Back</button><h4>Historic county</h4><div class="big">${esc(CNAME(c))}</div><p class="sub">${fmt(r.area_km2)} km² · rank ${R.county_rank.findIndex(x => x.county === c) + 1} of ${R.n_counties} by private Acts per 100 km²</p>
+<table><tr><td>Private Acts</td><td class="num">${fmt(r.private)}</td></tr><tr><td>Local Acts</td><td class="num">${fmt(r.local)}</td></tr>
+<tr><td>Private Acts per 100 km²</td><td class="num">${r.per100_private.toFixed(2)}</td></tr><tr><td>In the window (${winTxt()})</td><td class="num">${fmt(D.n)}</td></tr>
+<tr><td>First and last</td><td class="num">${r.first || ""} to ${r.last || ""}</td></tr><tr><td>Middle year</td><td class="num">${r.median_year || ""}</td></tr>
+<tr><td>In the war years</td><td class="num">${r.war_pct != null ? Math.round(r.war_pct) + "%" : ""}</td></tr></table>
+<h4>Acts per year</h4>${spark(c)}<h4>First Acts</h4><ol>${list.slice(0, 4).map(([a, i]) => `<li><span class="go" data-a="${i}">${esc(a[3])}</span> <small>${a[0]}</small></li>`).join("")}</ol>
+<h4>Last Acts</h4><ul>${list.slice(-3).reverse().map(([a, i]) => `<li><span class="go" data-a="${i}">${esc(a[3])}</span> <small>${a[0]}</small></li>`).join("")}</ul>`;
+    note(`<b>${esc(CNAME(c))}</b>: ${fmt(D.n)} Acts ${winTxt()}`);
+  } else if (S.sel && S.sel.t === "act") {
+    const a = J.acts[S.sel.i]; const pl = J.points.filter(p => p[3] === S.sel.i);
+    h = `<button class="back">Back</button><h4>${a[5] ? "Local Act" : "Private Act"}</h4><div class="big" style="font-size:20px">${esc(a[3])}</div><p class="sub">${actRef(a)}</p>
+<h4>Places on the map</h4><ul>${pl.map(p => `<li>${placeName(esc(p[4]))}</li>`).join("") || "<li><small>none located</small></li>"}</ul>${a[6] > pl.length ? `<p class="sub">${a[6] - pl.length} named place${a[6] - pl.length > 1 ? "s" : ""} not found in the gazetteer.</p>` : ""}
+${a[4] ? `<p><span class="go" data-c="${esc(a[4])}">More in ${esc(CNAME(a[4]))}</span></p>` : ""}`;
+    note("");
+  } else {
+    const C = counts(), D = density(); const top = Object.keys(D).filter(c => D[c].n).sort((x, y) => D[y].per100 - D[x].per100).slice(0, 8);
+    h = `<h4>On the map now</h4><div class="big">${fmt(C.n)}</div><p class="sub">enclosure Acts ${winTxt()} (${fmt(C.p)} private, ${fmt(C.l)} local), ${fmt(C.pl)} places located</p>
+<h4>Densest counties in the window</h4><ol>${top.map(c => `<li><span class="go" data-c="${esc(c)}">${esc(CNAME(c))}</span> <small>${D[c].per100.toFixed(2)} per 100 km², ${fmt(D[c].n)} Acts</small></li>`).join("")}</ol>
+<h4>Start here</h4><ul>${[["The first: Plumstead Marsh, 1562", "Plumstead Marsh"], ["Ten places in one Act: Shenstone, 1811", "Shenstone"], ["Enclosed four times: Elsdon", "Elsdon"], ["The war boom: Norfolk", "@Norfolk"], ["Late and upland: Radnorshire", "@Radnorshire"]].map(([t, q]) => `<li><span class="go" data-q="${esc(q)}">${esc(t)}</span></li>`).join("")}</ul>
+<p class="sub">Press play, or drag the year. Click a dot for its Act, or switch to the county view and click a county.</p>`;
+    note(S.y < YMAX || S.mode !== "cum" ? `<b>${S.y}</b>: ${fmt(C.n)} Acts ${winTxt()}` : "");
+  }
+  box.innerHTML = h;
+  const b = box.querySelector(".back"); if (b) b.onclick = () => { S.sel = null; if (popup) popup.remove(); applyFilters(); side(); };
+  box.querySelectorAll("[data-c]").forEach(e => e.onclick = () => pickCounty(e.dataset.c, true));
+  box.querySelectorAll("[data-a]").forEach(e => e.onclick = () => pickAct(+e.dataset.a));
+  box.querySelectorAll("[data-q]").forEach(e => e.onclick = () => { const q = e.dataset.q; if (q[0] === "@") pickCounty(q.slice(1), true); else { const k = J.points.findIndex(p => String(p[4]).split("|").some(s => s === q)); if (k >= 0) { setYear(YMAX); openPoint(k, true); } } });
+}
+function toMap() { if (small()) document.getElementById("mapbox").scrollIntoView({ behavior: "smooth", block: "start" }); }
+function fitCounty(c) { const f = CTY.features.find(x => x.properties.county === c); if (!f || !map) return; let b = new maplibregl.LngLatBounds();
+  const add = cs => typeof cs[0] === "number" ? b.extend(cs) : cs.forEach(add); add(f.geometry.coordinates); map.fitBounds(b, { padding: 30, maxZoom: 9 }); }
+function pickCounty(c, move) { if (!R.counties[c]) return; S.sel = { t: "cty", c }; if (move && ready) { fitCounty(c); toMap(); } if (popup) popup.remove(); applyFilters(); side(); }
+function pickAct(i) { const k = J.points.findIndex(p => p[3] === i); if (J.acts[i][0] > S.y) setYear(YMAX); if (k >= 0 && ready) { if (S.view !== "dots") setView("dots"); openPoint(k, true); toMap(); } else { S.sel = { t: "act", i }; side(); } }
+
+/* ---------- controls ---------- */
+const yr = document.getElementById("yr");
+function setYear(y) { S.y = Math.max(YMIN, Math.min(YMAX, y)); yr.value = S.y; const yv = document.getElementById("yv"); yv.textContent = S.y; yv.classList.toggle("war", S.y >= WAR[0] && S.y <= WAR[1]);
+  document.getElementById("ylab").textContent = S.y >= YMAX ? (S.mode === "cum" ? "all years" : "to the end") : S.mode === "cum" ? "all Acts to here" : "ten years to here"; if (J) { applyFilters(); side(); legend(); } }
+yr.addEventListener("input", () => { stop(); setYear(+yr.value); });
+function stop() { if (S.play) { clearInterval(S.play); S.play = null; document.getElementById("play").innerHTML = "&#9654;"; } }
+document.getElementById("play").onclick = () => {
+  if (S.play) return stop();
+  if (S.y >= YMAX) setYear(1740);
+  document.getElementById("play").innerHTML = "&#10074;&#10074;";
+  S.play = setInterval(() => { if (S.y >= YMAX) return stop(); setYear(S.y + 1); }, 160);
+};
+const press = (row, b) => document.querySelectorAll(row + " .btn").forEach(x => x.setAttribute("aria-pressed", x === b));
+document.querySelectorAll("#modeRow .btn").forEach(b => b.onclick = () => { S.mode = b.dataset.m; press("#modeRow", b); setYear(S.y); });
+function setView(v) { S.view = v; press("#viewRow", document.querySelector(`#viewRow [data-v="${v}"]`)); applyFilters(); legend(); side(); }
+document.querySelectorAll("#viewRow .btn").forEach(b => b.onclick = () => setView(b.dataset.v));
+document.querySelectorAll("#srcRow .btn").forEach(b => b.onclick = () => { S.src = +b.dataset.s; press("#srcRow", b); applyFilters(); legend(); side(); });
+(function focusRow() {
+  const row = document.getElementById("focusRow");
+  const F = [["England and Wales", null], ["The Midlands", [[-2.4, 51.7], [0.2, 53.3]]], ["Norfolk and Suffolk", [[0.1, 51.9], [1.8, 53.0]]], ["Yorkshire", [[-2.7, 53.3], [0.2, 54.7]]], ["The far north", [[-3.6, 54.0], [-1.3, 55.85]]], ["Wales", [[-5.4, 51.3], [-2.6, 53.5]]], ["The south-west", [[-5.8, 49.9], [-1.8, 51.9]]]];
+  F.forEach(([n, b]) => { const x = document.createElement("button"); x.className = "btn"; x.textContent = n; x.onclick = () => {
+    if (!ready) return; if (!b) { S.sel = null; if (popup) popup.remove(); map.easeTo(HOME()); applyFilters(); side(); } else map.fitBounds(b, { padding: 20 }); toMap(); }; row.appendChild(x); });
+})();
+function legend() {
+  const e = document.getElementById("legend"); if (!J) return; const C = counts(); let h = "";
+  if (S.view === "dots") {
+    h = DEC.map(([d, n], k) => C.dec[k] ? `<span><i style="background:${DCOL[k]}"></i>${esc(n)}</span>` : "").join("");
+    if (LY.local && S.src !== 0) h += `<span><i style="background:transparent;border:1.5px solid var(--fg)"></i>local Act</span>`;
+  } else {
+    h = BOUNDS.slice(0, -1).map((b, k) => `<span><i class="sq" style="background:${CRAMP[k]}"></i>${b}${k < BOUNDS.length - 2 ? " to " + BOUNDS[k + 1] : "+"}</span>`).join("") + `<span>Acts per 100 km² ${winTxt()}</span>`;
+  }
+  e.innerHTML = h;
+}
+
+/* ---------- search: places, counties, words in titles ---------- */
+(function search() {
+  const inp = document.getElementById("q"), sug = document.getElementById("sug"); let opts = [], k = -1;
+  const norm = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  function build(q) {
+    const nq = norm(q); if (nq.length < 2 || !J) return [];
+    const out = [];
+    Object.keys(R.counties).forEach(c => { const n = norm(CNAME(c)); if (n.includes(nq)) out.push({ t: "c", n: CNAME(c), c, s: n.startsWith(nq) ? 9 : 4 }); });
+    const seen = new Set();
+    J.points.forEach((p, i) => { const nm = String(p[4]).split("|"); const n0 = norm(nm[0]), n1 = norm(nm[1] || ""); if ((n0.includes(nq) || n1.includes(nq)) && !seen.has(nm[0] + p[3])) { seen.add(nm[0] + p[3]); out.push({ t: "p", n: nm[0], i, y: p[2], s: (n0 === nq || n1 === nq) ? 8 : n0.startsWith(nq) ? 6 : 2 }); } });
+    if (nq.length >= 4) { let m = 0; J.acts.forEach((a, i) => { if (norm(a[3]).includes(nq) && m++ < 60) out.push({ t: "a", n: a[3], i, y: a[0], s: 1 }); }); }
+    return out.sort((a, b) => b.s - a.s || (a.y || 0) - (b.y || 0)).slice(0, 12);
+  }
+  const lab = o => o.t === "c" ? `${esc(o.n)} <span>historic county</span>` : o.t === "p" ? `${esc(o.n)} <span>${o.y}, ${esc(CNAME(J.acts[J.points[o.i][3]][4]))}</span>` : `${esc(o.n)} <span>${o.y}</span>`;
+  const show = () => { sug.innerHTML = opts.map((o, i) => `<li role="option" aria-selected="${i === k}" data-i="${i}">${lab(o)}</li>`).join(""); sug.style.display = opts.length ? "block" : "none"; };
+  const choose = o => { sug.style.display = "none"; inp.value = o.n; inp.blur();
+    if (o.t === "c") pickCounty(o.c, true); else if (o.t === "p") { if (o.y > S.y) setYear(YMAX); if (S.view !== "dots") setView("dots"); openPoint(o.i, true); toMap(); } else pickAct(o.i); };
+  inp.addEventListener("input", () => { opts = build(inp.value); k = -1; show(); });
+  inp.addEventListener("keydown", e => { if (e.key === "ArrowDown") { k = Math.min(opts.length - 1, k + 1); show(); e.preventDefault(); } else if (e.key === "ArrowUp") { k = Math.max(0, k - 1); show(); e.preventDefault(); } else if (e.key === "Enter" && opts.length) { choose(opts[Math.max(0, k)]); } else if (e.key === "Escape") { sug.style.display = "none"; } });
+  sug.addEventListener("click", e => { const li = e.target.closest("li"); if (li) choose(opts[+li.dataset.i]); });
+  document.addEventListener("click", e => { if (!e.target.closest(".searchbox")) sug.style.display = "none"; });
+})();
+
+function startMap() {
+  map = new maplibregl.Map({ container: "map", style: baseStyle(), ...HOME(), minZoom: 4, maxZoom: 13, maxBounds: [[-12, 48.5], [6, 57.5]], attributionControl: { compact: true }, fadeDuration: 0 });
+  window.map = map;
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
+  map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-left");
+  layerPanel();
+  map.on("error", e => { /* tiles from outside servers may fail: the map works without them */ });
+  map.on("load", () => {
+    map.getSource("pts").setData(feats()); ready = true;
+    const ld = document.getElementById("loading"); if (ld) ld.remove();
+    applyLayers(); legend(); side();
+    map.on("click", "dots", e => { if (S.view !== "dots") return; const f = e.features[0]; openPoint(f.id, false); });
+    map.on("click", "choro", e => { if (S.view !== "cty") return; pickCounty(e.features[0].properties.county, false); });
+    map.on("mousemove", "choro", e => { if (S.view !== "cty") return; const c = e.features[0].properties.county, D = density()[c]; map.getCanvas().style.cursor = "pointer";
+      showTip(`<b>${esc(CNAME(c))}</b><br>${fmt(D.n)} Acts ${winTxt()} (${fmt(D.p)} private, ${fmt(D.l)} local)<br>${D.per100.toFixed(2)} per 100 km²`, e.originalEvent.clientX, e.originalEvent.clientY); });
+    map.on("mouseleave", "choro", () => { map.getCanvas().style.cursor = ""; hideTip(); });
+    map.on("mouseenter", "dots", () => { if (S.view === "dots") map.getCanvas().style.cursor = "pointer"; });
+    map.on("mouseleave", "dots", () => map.getCanvas().style.cursor = "");
+    map.on("moveend", placeNames);
+  });
+}
+
+/* ---------- charts ---------- */
+function yearChart() {
+  const Yr = R.years;
+  resp(document.getElementById("yearChart"), (w, sm) => {
+    const h = sm ? 280 : 360, m = { l: 34, r: 8, t: 22, b: 28 }, svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": "Bar chart of enclosure Acts per year from 1700 to 1849, private and local, with the French war years shaded" }, document.getElementById("yearChart"));
+    const y0 = 1700, y1 = 1849, mx = 140, bw = (w - m.l - m.r) / (y1 - y0 + 1), X = y => m.l + (y - y0) * bw, Y = v => h - m.b - (h - m.t - m.b) * v / mx;
+    el("rect", { x: X(WAR[0]), y: m.t, width: X(WAR[1] + 1) - X(WAR[0]), height: h - m.t - m.b, fill: "var(--war)" }, svg);
+    lbl(svg, (X(WAR[0]) + X(WAR[1] + 1)) / 2, m.t - 6, sm ? "French wars" : `War with France, ${WAR[0]} to ${WAR[1]}`, "lab s b", "middle").setAttribute("style", `fill:${css("--hot")}`);
+    for (let v = 0; v <= mx; v += 20) { el("line", { x1: m.l, x2: w - m.r, y1: Y(v), y2: Y(v), stroke: css("--rule") }, svg); lbl(svg, m.l - 6, Y(v) + 4, v, "lab s m", "end"); }
+    for (let y = 1700; y <= 1840; y += sm ? 40 : 20) lbl(svg, X(y) + bw / 2, h - 9, y, "lab s m", "middle");
+    Yr.forEach(d => { if (d.private) el("rect", { x: X(d.y) + .2, y: Y(d.private), width: Math.max(1, bw - .6), height: h - m.b - Y(d.private), fill: css("--green") }, svg);
+      if (d.local) el("rect", { x: X(d.y) + .2, y: Y(d.n), width: Math.max(1, bw - .6), height: Y(d.private) - Y(d.n), fill: css("--gold") }, svg);
+      if (d.y === 1802 || d.y === 1803) lbl(svg, X(d.y) + bw / 2, Y(d.n) - 3, "*", "lab s", "middle"); });
+    const pk = R.peaks;
+    [[pk.first_wave_year, pk.first_wave_n, `${pk.first_wave_year}: ${pk.first_wave_n}`, "middle"], [pk.all_year, pk.all_n, `${pk.all_year}: ${pk.all_n}`, "start"]].forEach(([y, v, t, a]) => lbl(svg, X(y) + bw / 2 + (a === "start" ? 4 : 0), Y(v) - 6, t, "lab s b", a));
+    const g = el("line", { x1: 0, x2: 0, y1: m.t, y2: h - m.b, stroke: css("--fg"), opacity: 0 }, svg);
+    const hitr = el("rect", { x: m.l, y: m.t, width: w - m.l - m.r, height: h - m.t - m.b, fill: "transparent" }, svg);
+    const mv = ev => { const r = svg.getBoundingClientRect(), x = (ev.clientX - r.left) * w / r.width, y = Math.floor(y0 + (x - m.l) / bw); const d = Yr.find(q => q.y === y); if (!d) return;
+      g.setAttribute("x1", X(y) + bw / 2); g.setAttribute("x2", X(y) + bw / 2); g.setAttribute("opacity", .4);
+      showTip(`<b>${y}</b>: ${d.n} enclosure Act${d.n === 1 ? "" : "s"}<br><span style="color:${css("--green")}">■</span> private ${d.private}${d.local || y >= 1799 ? `<br><span style="color:${css("--gold")}">■</span> local ${d.local}${y === 1802 || y === 1803 ? " (not collected)" : ""}` : ""}`, ev.clientX, ev.clientY); };
+    hitr.addEventListener("mousemove", mv); hitr.addEventListener("click", ev => { ev.stopPropagation(); mv(ev); }); hitr.addEventListener("mouseleave", () => { hideTip(); g.setAttribute("opacity", 0); });
+  });
+  document.getElementById("yearLegend").innerHTML = `<span><i class="sq" style="background:var(--green)"></i>private Acts</span><span><i class="sq" style="background:var(--gold)"></i>local Acts</span><span><i class="sq" style="background:var(--war)"></i>French wars</span><span>* local Acts not collected</span>`;
+}
+function eraChart() {
+  const E = R.eras, K = [["before", `to ${WAR[0] - 1}`, "#B86E22"], ["war", `${WAR[0]} to ${WAR[1]}`, css("--hot")], ["after", `from ${WAR[1] + 1}`, "#5A4B9E"]];
+  resp(document.getElementById("eraChart"), (w, sm) => {
+    const rows = [["private", "Private Acts"], ["local", "Local Acts"], ["all", "All"]], lw = sm ? 96 : 130, rh = 34, h = rows.length * rh + 30;
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": "Shares of enclosure Acts before, during and after the French wars" }, document.getElementById("eraChart"));
+    rows.forEach(([k, n], i) => { const y = i * rh; lbl(svg, lw - 8, y + 21, `${n}`, "lab", "end"); let x = lw;
+      K.forEach(([kk, lab, c]) => { const v = E[k][kk + "_pct"], ww = (w - lw - 4) * v / 100; if (!v) return; const b = el("rect", { x, y: y + 5, width: Math.max(.5, ww - 1), height: rh - 10, fill: c }, svg);
+        if (ww > 44) lbl(svg, x + ww / 2, y + 22, Math.round(v) + "%", "lab b", "middle").setAttribute("style", "fill:#fff");
+        b.addEventListener("mousemove", ev => showTip(`<b>${n}, ${lab}</b><br>${fmt(E[k][kk])} Acts, ${v.toFixed(1)}%`, ev.clientX, ev.clientY)); b.addEventListener("mouseleave", hideTip); x += ww; }); });
+    let x = sm ? 4 : lw; K.forEach(([kk, lab, c]) => { el("rect", { x, y: h - 16, width: 11, height: 11, fill: c }, svg); lbl(svg, x + 16, h - 6, lab, "lab s m"); x += sm ? 106 : 120; });
+  });
+}
+function ctyChart() {
+  const C = R.county_rank;
+  resp(document.getElementById("ctyChart"), (w, sm) => {
+    const rh = sm ? 15 : 16, lw = sm ? 112 : 140, h = C.length * rh + 26, mx = 8;
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": "Bar chart of private enclosure Acts per 100 square kilometres for each historic county" }, document.getElementById("ctyChart"));
+    lbl(svg, sm ? 4 : lw, 12, sm ? "private Acts per 100 km² (Acts)" : "private Acts per 100 km² (number of Acts)", "lab s m");
+    C.forEach((r, i) => { const y = 20 + i * rh, bwid = (w - lw - 70) * r.per100 / mx;
+      const nm = lbl(svg, lw - 6, y + rh - 4, r.name, "lab s", "end"); nm.style.cursor = "pointer";
+      const b = el("rect", { x: lw, y: y + 2, width: Math.max(1, bwid), height: rh - 4, fill: cCol(r.per100), stroke: r.per100 < 1 ? css("--border") : "none" }, svg); b.style.cursor = "pointer";
+      lbl(svg, lw + bwid + 4, y + rh - 4, `${r.per100 < 1 ? r.per100.toFixed(2) : r.per100.toFixed(1)} (${r.n})`, "lab s m");
+      const go = () => { document.getElementById("atlas").scrollIntoView({ behavior: "smooth" }); setTimeout(() => { setView("cty"); pickCounty(r.county, true); }, 350); };
+      [b, nm].forEach(e => { e.addEventListener("click", go); e.addEventListener("mousemove", ev => showTip(`<b>${esc(r.name)}</b><br>${fmt(r.n)} private Acts, ${fmt(r.all)} with local<br>${r.per100.toFixed(2)} per 100 km²`, ev.clientX, ev.clientY)); e.addEventListener("mouseleave", hideTip); }); });
+  });
+}
+function ctyTable() {
+  const t = document.getElementById("ctyTable"), rows = Object.values(R.counties);
+  const cols = [["name", "County", 0], ["private", "Private", 1], ["local", "Local", 1], ["per100_private", "Per 100 km²", 1], ["first", "First", 1], ["last", "Last", 1], ["war_pct", "War %", 1]];
+  let key = "per100_private", dir = -1;
+  const draw = () => { rows.sort((a, b) => { const x = a[key], y = b[key]; return (typeof x === "string" ? x.localeCompare(y) : (x ?? -1) - (y ?? -1)) * dir; });
+    t.innerHTML = `<thead><tr>${cols.map(([k, n, r]) => `<th class="${r ? "r" : ""}" data-k="${k}">${n}${k === key ? (dir < 0 ? " ▼" : " ▲") : ""}</th>`).join("")}</tr></thead><tbody>` +
+      rows.map(r => `<tr data-i="${esc(r.county)}"><td>${esc(r.name)}</td><td class="r">${fmt(r.private)}</td><td class="r">${fmt(r.local)}</td><td class="r">${r.per100_private.toFixed(2)}</td><td class="r">${r.first || ""}</td><td class="r">${r.last || ""}</td><td class="r">${r.war_pct != null ? Math.round(r.war_pct) : ""}</td></tr>`).join("") + `</tbody>`;
+    t.querySelectorAll("th").forEach(th => th.onclick = () => { const k = th.dataset.k; dir = k === key ? -dir : (k === "name" ? 1 : -1); key = k; draw(); });
+    t.querySelectorAll("tr[data-i]").forEach(r => r.onclick = () => { document.getElementById("atlas").scrollIntoView({ behavior: "smooth" }); setTimeout(() => { setView("cty"); pickCounty(r.dataset.i, true); }, 350); }); };
+  draw();
+}
+function waveChart() {
+  const W = R.waves, RG = [["belt", "Midland belt"], ["north", "The north"], ["southwest", "South-west and Welsh border"], ["eastanglia", "Norfolk and Suffolk"], ["southeast", "Home counties and Kent"], ["wales", "Wales"]];
+  const P = [["w1", "1750 to 1779", "#B86E22"], ["war", `${WAR[0]} to ${WAR[1]}`, "#2C7FA6"], ["after", "1816 to 1849", "#5A4B9E"]];
+  resp(document.getElementById("waveChart"), (w, sm) => {
+    const lw = sm ? 124 : 210, gh = 54, h = RG.length * gh + 30, mx = 60;
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": "Share of enclosure Acts by region in the first wave, the war years and after" }, document.getElementById("waveChart"));
+    RG.forEach(([k, n], i) => { const y = i * gh; const t = lbl(svg, lw - 8, y + 26, sm ? ({ belt: "Midland belt", north: "The north", southwest: "South-west", eastanglia: "Norfolk, Suffolk", southeast: "Home counties", wales: "Wales" })[k] : n, "lab", "end");
+      P.forEach(([pk, pl, c], j) => { const v = W[pk][k + "_pct"], ww = (w - lw - 40) * v / mx, yy = y + 6 + j * 14;
+        const b = el("rect", { x: lw, y: yy, width: Math.max(1, ww), height: 12, fill: c }, svg); lbl(svg, lw + ww + 4, yy + 10, Math.round(v) + "%", "lab s m");
+        b.addEventListener("mousemove", ev => showTip(`<b>${esc(n)}</b>, ${pl}<br>${fmt(W[pk][k + "_n"])} Acts, ${v.toFixed(1)}% of the period's Acts`, ev.clientX, ev.clientY)); b.addEventListener("mouseleave", hideTip); }); });
+    let x = sm ? 4 : lw; P.forEach(([pk, pl, c]) => { el("rect", { x, y: h - 16, width: 11, height: 11, fill: c }, svg); lbl(svg, x + 16, h - 6, sm ? ({ w1: "first wave", war: "war years", after: "after 1815" })[pk] : pl, "lab s m"); x += sm ? 98 : 130; });
+  });
+}
+function cenChart() {
+  const C = R.centroid;
+  resp(document.getElementById("cenChart"), (w, sm) => {
+    const lon0 = -2.15, lon1 = -0.2, lat0 = 52.05, lat1 = 53.25, k = Math.cos(52.6 * Math.PI / 180);
+    const hw = w, hh = Math.round(w * (lat1 - lat0) / ((lon1 - lon0) * k)), h = Math.min(hh, sm ? 380 : 520);
+    const sc = h / (lat1 - lat0), X = lo => (lo - lon0) * k * sc + (w - (lon1 - lon0) * k * sc) / 2, Y = la => (lat1 - la) * sc;
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": "Map of the East Midlands showing the mean position of enclosure Acts in each decade", style: "overflow:hidden" }, document.getElementById("cenChart"));
+    el("rect", { x: 0, y: 0, width: w, height: h, fill: css("--land") }, svg);
+    CTY.features.forEach(f => { const g = f.geometry, polys = g.type === "Polygon" ? [g.coordinates] : g.coordinates;
+      polys.forEach(p => el("path", { d: "M" + p[0].map(([lo, la]) => `${X(lo).toFixed(1)},${Y(la).toFixed(1)}`).join("L") + "Z", fill: "none", stroke: isDark() ? "rgba(255,255,255,.2)" : "#fff", "stroke-width": 1.2 }, svg)); });
+    [["Nottingham", -1.1505, 52.9536], ["Leicester", -1.1332, 52.6369], ["Northampton", -0.8901, 52.2405], ["Coventry", -1.5197, 52.4068], ["Derby", -1.4746, 52.9225]].forEach(([n, lo, la]) => {
+      el("rect", { x: X(lo) - 3, y: Y(la) - 3, width: 6, height: 6, fill: css("--card"), stroke: css("--muted") }, svg); const lft = n === "Nottingham" || n === "Derby"; const t = lbl(svg, X(lo) + (lft ? -6 : 6), Y(la) + (lft ? 16 : -6), n, "lab s m", lft ? "end" : "start"); t.setAttribute("font-style", "italic"); });
+    el("polyline", { points: C.slice(1).map(c => `${X(c.lon)},${Y(c.lat)}`).join(" "), fill: "none", stroke: css("--fg"), "stroke-width": 1.8 }, svg);
+    C.forEach((c, i) => { const col = DCOL[Math.min(decBin(c.d0), DCOL.length - 1)]; const cc = el("circle", { cx: X(c.lon), cy: Y(c.lat), r: sm ? 6 : 8, fill: col, stroke: css("--fg"), "stroke-width": 1.3 }, svg);
+      const pos = { "1750s": [-12, -10, "end"], "1780s": [-12, 4, "end"], "1790s": [0, -13, "middle"], "1810s": [-12, 10, "end"] }[c.label] || [12, 4, "start"]; lbl(svg, X(c.lon) + pos[0], Y(c.lat) + pos[1], c.label, "lab s b", pos[2]);
+      cc.addEventListener("mousemove", ev => showTip(`<b>${esc(c.label)}</b>: ${fmt(c.n)} located Acts<br>centre near ${esc(c.near)} (${c.near_km} km)`, ev.clientX, ev.clientY)); cc.addEventListener("mouseleave", hideTip); });
+  });
+}
+function twiceChart() {
+  const seen = new Set(), T = [...R.twice_top.slice(0, 5), ...R.twice_gap.slice(0, 3)].filter(t => !seen.has(t.place) && seen.add(t.place));
+  resp(document.getElementById("twiceChart"), (w, sm) => {
+    const lw = sm ? 120 : 200, rh = 30, h = T.length * rh + 30, y0 = 1715, y1 = 1850, X = y => lw + (w - lw - 10) * (y - y0) / (y1 - y0);
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": "Timeline of places named in several enclosure Acts" }, document.getElementById("twiceChart"));
+    el("rect", { x: X(WAR[0]), y: 0, width: X(WAR[1] + 1) - X(WAR[0]), height: h - 24, fill: "var(--war)" }, svg);
+    for (let y = 1720; y <= 1840; y += sm ? 40 : 20) lbl(svg, X(y), h - 6, y, "lab s m", "middle");
+    T.forEach((t, i) => { const y = i * rh + 16; const nm = lbl(svg, lw - 8, y + 4, t.place, "lab", "end"); nm.classList.add("go"); nm.style.cursor = "pointer";
+      nm.addEventListener("click", () => { const k = J ? J.points.findIndex(p => String(p[4]).split("|").includes(t.place)) : -1; if (k >= 0) { document.getElementById("atlas").scrollIntoView({ behavior: "smooth" }); setTimeout(() => { setYear(YMAX); setView("dots"); openPoint(k, true); }, 350); } });
+      el("line", { x1: X(Math.min(...t.years)), x2: X(Math.max(...t.years)), y1: y, y2: y, stroke: css("--rule"), "stroke-width": 2 }, svg);
+      t.years.forEach(yy => { const c = el("circle", { cx: X(yy), cy: y, r: 6, fill: DCOL[decBin(yy)], stroke: css("--fg"), "stroke-width": 1 }, svg); c.addEventListener("mousemove", ev => showTip(`<b>${esc(t.place)}</b>, ${esc(CNAME(t.county))}<br>Act of ${yy}`, ev.clientX, ev.clientY)); c.addEventListener("mouseleave", hideTip); }); });
+  });
+}
+function charts() { yearChart(); eraChart(); ctyChart(); ctyTable(); waveChart(); cenChart(); twiceChart(); }
+
+/* ---------- start ---------- */
+document.getElementById("theme").onclick = () => { const r = document.documentElement; r.dataset.theme = isDark() ? "light" : "dark"; applyLayers(); legend(); redraws.forEach(f => f()); };
+charts(); side(); setYear(YMAX);
+fetch("data/places.json").then(r => r.json()).then(d => { J = d; legend(); side();
+  if (typeof maplibregl === "undefined") { document.getElementById("loading").textContent = "The map library did not load. The charts below still work."; return; }
+  try { startMap(); } catch (e) { document.getElementById("loading").textContent = "The map could not start in this browser. The charts below still work."; }
+}).catch(() => { const l = document.getElementById("loading"); if (l) l.textContent = "The map data could not be loaded. The charts below still work."; });
+</script>
+/*FULLSCREEN*/
+</body>
+</html>

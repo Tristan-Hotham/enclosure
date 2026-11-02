@@ -1,0 +1,142 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\newfontfamily\headfont{Inter}[UprightFont=*-ExtraBold,BoldFont=*-ExtraBold,Extension=.otf,Path=/usr/share/fonts/opentype/inter/]
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{graphicx,booktabs,float,caption,array,xcolor,longtable}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage[round]{natbib}
+\usepackage{setspace}
+\setstretch{1.05}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\titleformat{\section}{\headfont\Large}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\headfont\large}{\thesubsection}{0.8em}{}
+\captionsetup{font=small,labelfont=bf}
+\urlstyle{same}
+\hypersetup{pdftitle={Fencing the Commons},pdfauthor={Tristan Hotham}}
+
+\begin{document}
+\begin{center}
+{\Large\bfseries Fencing the Commons\par}
+\vspace{0.4em}
+{\large Mapping parliamentary enclosure in England and Wales\\from the Chronological Tables of Private and Local Acts\par}
+\vspace{1.2em}
+{\large Tristan Hotham\par}
+\vspace{0.3em}
+{\small Independent researcher\\
+ORCID: 0000-0003-4931-9349\\
+DOI: \href{https://doi.org/{{meta.doi}}}{https://doi.org/{{meta.doi}}}\par}
+\vspace{0.8em}
+2026
+\end{center}
+
+\begin{quote}
+\small
+\begin{center}\textbf{Abstract}\end{center}
+I extract every enclosure Act listed in the Chronological Tables of Private and Personal Acts and of Local Acts published on legislation.gov.uk, place the parishes and townships they name on the map, and describe when and where parliamentary enclosure happened in England and Wales. The tables list {{source.n_private|int}} private Acts and {{source.n_local|int}} local Acts that enclosed open fields, commons or wastes, from {{first.year|raw}} to {{source.last_year|raw}}. I geocode {{geo.matched|int}} of the {{geo.places|int}} places they name ({{geo.rate|int}}\%) against a Wikidata gazetteer, locating {{geo.acts_located|int}} Acts. The Acts come in two waves: {{peaks.y1760_79|int}} private Acts in the 1760s and 1770s, peaking at {{peaks.first_wave_n|int}} in {{peaks.first_wave_year|raw}}, and {{peaks.y1793_1815_all|int}} Acts in the {{eras.war_years|int}} years of war with France from {{meta.war.0|raw}} to {{meta.war.1|raw}}, peaking at {{peaks.all_n|int}} in {{peaks.all_year|raw}}. The war years account for {{eras.all.war_pct|int}}\% of all the Acts. From 1799 a growing share of enclosure Acts appears in the local table rather than the private one (about half in 1811 to 1814), so the second wave is visible only when both tables are combined. Enclosure by Act was concentrated in a Midland belt: twelve counties with {{belt.area_pct|int}}\% of England's area had {{belt.acts_pct|int}}\% of its private enclosure Acts, led by Northamptonshire with {{counties.Northamptonshire.per100_private|f1}} Acts per 100 km$^2$, while Kent, Devon and Cornwall, long enclosed by other means, had {{counties.Kent.private|int}}, {{counties.Devon.private|int}} and {{counties.Cornwall.private|int}}. The second wave was not a repeat of the first: the Midland belt's share of Acts fell from {{waves.w1.belt_pct|int}}\% to {{waves.war.belt_pct|int}}\%, while Norfolk and Suffolk, the south-west and the Welsh border, the home counties and Wales all gained. The centre of gravity of enclosure moved about {{centroid_move.km|int}} km, from near Nottingham in the 1760s to west of Leicester in the 1810s.
+
+\textbf{Keywords:} enclosure; inclosure Acts; open fields; common rights; agrarian history; England; Wales; French wars; historical GIS; legislation.gov.uk
+\end{quote}
+
+\section{Introduction}
+Parliamentary enclosure turned much of what remained of England's open fields, commons and wastes into privately held, hedged fields between the middle of the eighteenth century and the middle of the nineteenth. Where the owners of a parish could not or would not enclose by agreement, a private Act of Parliament appointed commissioners who surveyed the parish, extinguished common rights, and allotted the land in severalty. The history of the process has been written county by county, above all in W. E. Tate's list of Acts and awards \citep{tate1978} and Michael Turner's historical geography \citep{turner1980}, and its effects have been argued over for more than a century, from the Hammonds' account of the labourer's losses \citep{hammond1911} to Chambers and Mingay's account of agricultural progress \citep{chambers1966}, Allen's reassessment of the gains \citep{allen1992} and Neeson's study of common right \citep{neeson1993}.
+
+This paper does something narrower and more mechanical. It takes the Chronological Tables of Private and of Local Acts as published by legislation.gov.uk \citep{legpriv,legloc}, extracts every enclosure Act, places the parishes and townships named in each title on the map using open data \citep{wikidata}, and describes the resulting pattern in time and space. Everything is reproducible from the published tables, and an interactive map accompanies the paper (\url{{{meta.page}}}).
+
+\section{Data}
+\textbf{The private table.} The Chronological Table of Private and Personal Acts lists every private Act from 1539 to 1987 by session and chapter, with a short title, in 33 parts. I use all {{source.private_pages|int}} parts ({{source.private_rows|int}} rows). A typical enclosure entry reads ``c. 1 Turvey (Bedfordshire) inclosure.'', under a session heading such as ``1783 (23 Geo. 3).''.
+
+\textbf{The local table.} The Chronological Table of Local Acts begins in 1797. Its enclosure titles rarely give a county (``c.vii Upton and Fishley Inclosures.''). I use {{source.local_pages|int}} of its {{source.local_pages_total|int}} pages; the parts for 1802 to 1803 and for 1841 could not be collected, and only headings and rows mentioning inclosure were kept ({{source.local_rows|int}} rows).
+
+\textbf{The gazetteer.} About 49,500 rows from Wikidata describe places in the United Kingdom with a coordinate, a type (civil parish, village, town, hamlet) and, for most, a historic county. After merging repeated rows and keeping England and Wales, {{geo.gaz_ew|int}} places remain. Cornish places, which lack a historic county in Wikidata, are assigned to Cornwall by the modern county outline; a few others take the county of their nearest neighbours.
+
+\section{Methods}
+\subsection{Reading the tables}
+Titles that run over two rows are rejoined, and annotation rows recording later repeals, amendments and savings (``r.-'', ``am.-'', ``see:'', ``saved in pt.-'') are dropped with their run-on lines. Each Act is dated by the first calendar year of its session heading. Every title containing a word beginning ``inclos'' or ``enclos'' is kept: {{source.n_private_mentions|int}} private and {{source.n_local_mentions|int}} local titles. Each is classed as an enclosure Act (the usual ``Place (County) inclosure'', including drainage and inclosure, inclosure with tithe exchange or commutation, and commons inclosure), an Act confirming an inclosure already agreed ({{source.agree_private|int}} private Acts, counted with the enclosure Acts), an amendment ({{source.amend_private|int}} private Acts that only explain, amend or extend an earlier Act), a confirmation of the Inclosure Commissioners' provisional orders ({{source.orders_local|int}} local Acts after 1845), or other titles that mention enclosing in passing. Ten Acts for Irish counties are excluded. The result is {{source.n_private|int}} private and {{source.n_local|int}} local enclosure Acts. A further {{source.allotment_only|int}} private titles speak only of allotment or division and are not counted.
+
+\subsection{Places and geocoding}
+The text before a title's first county is split into places on commas and ``and'', keeping compound names (``Great and Little Cressingham'' becomes Great Cressingham and Little Cressingham) and alternative spellings (``North Hykeham or Hickham''). Each place is matched to the gazetteer within the county or counties the title names, using a normalised key (Saint and St., upon and on, juxta and next, possessives and hyphens). When there is no exact match, the parish is tried for a piece of land named within it (``Glusburn Moor in Kildwick''), the first township of a compound name, and a unique longer name (Goring for Goring-on-Thames). Old spellings are matched by string similarity (ratio at least 0.88) only when one candidate is clearly best. Ambiguous names are settled only by another place in the same Act within 20 km. A unique name in a neighbouring county within 15 km is accepted, which recovers parishes in detached parts of counties such as Norham and Blockley. Places in local Acts without a county are matched only when the name is unique in England and Wales or settled by a neighbour. Table~\ref{tab:geo} summarises the matches; every unmatched place is listed with the data.
+
+{{TABLE_GEO}}
+
+\subsection{Counties and areas}
+An Act is counted for the first county its title names, or, if it names none, for the county of its first located place. There is no historic county boundary file among the inputs, so I rebuild one: a Voronoi cell around every gazetteer place, merged by historic county and clipped to the coast. The resulting areas match the historic counties closely (Yorkshire {{counties.Yorkshire.area_km2|int}} km$^2$, Rutland {{counties.Rutland.area_km2|int}} km$^2$) and are used for densities. Yorkshire is treated as one county.
+
+\subsection{Periods, regions and centroids}
+The French wars are taken as {{meta.war.0|raw}} to {{meta.war.1|raw}} inclusive. The first wave is compared over 1750 to 1779. Regions are groups of historic counties: the Midland belt (Northamptonshire, Leicestershire, Oxfordshire, Cambridgeshire, Huntingdonshire, Bedfordshire, Buckinghamshire, Warwickshire, Rutland, Nottinghamshire, Lincolnshire and Berkshire), the north (Northumberland, Cumberland, Westmorland, Durham, Yorkshire and Lancashire), the south-west and Welsh border (Cornwall, Devon, Somerset, Dorset, Wiltshire, Hampshire, Gloucestershire, Herefordshire, Shropshire and Worcestershire), Norfolk and Suffolk, the home counties and Kent (Kent, Sussex, Surrey, Middlesex, Essex and Hertfordshire), and Wales. The centroid of a decade is the mean British National Grid position of its located Acts, each Act placed at the mean of its located places.
+
+\section{Results}
+\subsection{Two waves}
+Figure~\ref{fig:years} shows the Acts per year. Before 1750 there are {{first.n_before1750|int}} enclosure Acts. The first wave brought {{peaks.y1750s|int}} private Acts in the 1750s, {{peaks.y1760s|int}} in the 1760s and {{peaks.y1770s|int}} in the 1770s, with a peak of {{peaks.first_wave_n|int}} in {{peaks.first_wave_year|raw}}. The 1780s were quieter ({{peaks.y1780s|int}} Acts, with {{peaks.trough_n|int}} in {{peaks.trough_year|raw}}). The war years brought {{peaks.y1793_1815_all|int}} Acts, {{peaks.y1793_1815_per_year|f1}} a year against {{peaks.y1760_79_per_year|f1}} a year in 1760 to 1779. Private Acts peaked at {{peaks.private_n|int}} in {{peaks.private_year|raw}}; with local Acts included, every year from 1809 to 1814 saw more than 100, and {{peaks.all_year|raw}} saw {{peaks.all_n|int}}. The 1800s were the busiest decade ({{peaks.y1800s_all|int}} Acts), followed by the 1810s ({{peaks.y1810s_all|int}}). The end of the war ended the boom: {{peaks.y1814|int}} Acts in 1814, {{peaks.y1815|int}} in 1815 and {{peaks.y1816|int}} in 1816. Of the private Acts, {{eras.private.before_pct|int}}\% came before {{meta.war.0|raw}}, {{eras.private.war_pct|int}}\% in the war years and {{eras.private.after_pct|int}}\% after; of the local Acts, {{eras.local.war_pct|int}}\% came in the war years (Figure~\ref{fig:eras}).
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_years.png}
+\caption{Enclosure Acts per year, 1700 to 1849: private Acts (green) and local Acts (gold), with the French wars shaded. Local Acts for 1802 and 1803 were not collected.}\label{fig:years}\end{figure}
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_eras.png}
+\caption{Share of enclosure Acts before, during and after the French wars.}\label{fig:eras}\end{figure}
+
+The split between the tables matters. Local enclosure Acts appear from {{peaks.local_first|raw}}; {{peaks.local_1798_1815|int}} of them were passed by 1815, {{peaks.local_share_1798_1815|int}}\% of all enclosure Acts in 1798 to 1815 and {{peaks.local_share_1811_14|int}}\% in 1811 to 1814. Counting private Acts alone would show the second wave peaking in 1801 and declining thereafter, which is an artefact of classification.
+
+\subsection{Where}
+Figure~\ref{fig:map} maps the {{geo.matched|int}} located places and Figure~\ref{fig:counties} the density of private Acts by county; Table~\ref{tab:counties} gives the figures. Northamptonshire ({{counties.Northamptonshire.per100_private|f2}} Acts per 100 km$^2$), Leicestershire ({{counties.Leicestershire.per100_private|f2}}), Rutland ({{counties.Rutland.per100_private|f2}}), Huntingdonshire ({{counties.Huntingdonshire.per100_private|f2}}) and Nottinghamshire ({{counties.Nottinghamshire.per100_private|f2}}) lead. The Midland belt has {{belt.n|int}} private Acts on {{belt.area|int}} km$^2$, {{belt.per100|f2}} per 100 km$^2$ against {{belt.eng_per100|f2}} for England. At the other end, Kent ({{light.Kent.per100|f2}}), Devon ({{light.Devon.per100|f2}}) and Cornwall ({{light.Cornwall.per100|f2}}) rank {{light.Kent.rank|int}}th, {{light.Devon.rank|int}}rd and last of {{n_counties|int}} counties, as expected for counties enclosed early by agreement or with little open field. Essex and Sussex are also low. By number rather than density, Yorkshire has the most Acts ({{counties.Yorkshire.private|int}} private), then Lincolnshire ({{counties.Lincolnshire.private|int}}) and Norfolk ({{counties.Norfolk.private|int}}). Wales has {{wales.private|int}} private and {{wales.all|int}} Acts in all, {{wales.war_pct|int}}\% of its private Acts in the war years. The Midland counties were enclosed earliest: the middle year of Leicestershire's Acts is {{counties.Leicestershire.median_year|raw}}, of Northamptonshire's {{counties.Northamptonshire.median_year|raw}}, against {{counties.Norfolk.median_year|raw}} for Norfolk and {{counties.Devon.median_year|raw}} for Devon.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_map.png}
+\caption{Places named in enclosure Acts and found in the gazetteer, coloured by the decade of the Act.}\label{fig:map}\end{figure}
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_counties.png}
+\caption{Private enclosure Acts per 100 km$^2$ by historic county (rebuilt boundaries), with the highest and lowest counties.}\label{fig:counties}\end{figure}
+
+{{TABLE_COUNTIES}}
+
+\subsection{The geography of the second wave}
+Figure~\ref{fig:waves} compares 1750 to 1779 with the war years. The Midland belt's share fell from {{waves.w1.belt_pct|f1}}\% to {{waves.war.belt_pct|f1}}\%, the north's from {{waves.w1.north_pct|f1}}\% to {{waves.war.north_pct|f1}}\%. Norfolk and Suffolk rose from {{waves.w1.eastanglia_pct|f1}}\% to {{waves.war.eastanglia_pct|f1}}\%, the south-west and Welsh border from {{waves.w1.southwest_pct|f1}}\% to {{waves.war.southwest_pct|f1}}\%, the home counties and Kent from {{waves.w1.southeast_pct|f1}}\% to {{waves.war.southeast_pct|f1}}\%, and Wales from {{waves.w1.wales_pct|f1}}\% to {{waves.war.wales_pct|f1}}\%. Located Acts west of 2$^\circ$W rose from {{waves.w1.west_pct|f1}}\% to {{waves.war.west_pct|f1}}\%. Acts naming more than one place became more common ({{waves.w1.multi_pct|int}}\% to {{waves.war.multi_pct|int}}\%). The historiography describes the war-years enclosures as reaching further into commons, heaths and wastes \citep{turner1980}; the titles cannot test that directly, since only {{wording.waste_pct|f1}}\% of all enclosure titles name a common, moor, heath, fen, forest or similar land, and that share did not rise in the war years ({{waves.w1.waste_pct|f1}}\% against {{waves.war.waste_pct|f1}}\%).
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_waves.png}
+\caption{Located places in Acts of 1750 to 1779 and of {{meta.war.0|raw}} to {{meta.war.1|raw}}, with each period's share of Acts by region.}\label{fig:waves}\end{figure}
+
+\subsection{The moving centre}
+The decade centroids (Figure~\ref{fig:centroid}) stay within the East Midlands throughout. In the 1760s the centre lay near {{centroid.2.near|raw}} on the edge of Nottingham, drawn north by Yorkshire and Lincolnshire; by the 1810s it lay {{centroid_move.km|int}} km away, near {{centroid.7.near|raw}} west of Leicester (about {{centroid_move.south_km|int}} km south and {{centroid_move.west_km|int}} km west); in the 1830s and 1840s it was near {{centroid.9.near|raw}}.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_centroid.png}
+\caption{Mean position of the located Acts of each decade.}\label{fig:centroid}\end{figure}
+
+\subsection{Cases}
+The earliest title in the private table that mentions enclosure is the {{first.year|raw}} Act for Plumstead Marsh in Kent, a marsh drainage and embanking scheme; there are {{plumstead.n|int}} Plumstead Marsh Acts in all. The first title of the familiar form after it is Ropley Commons (Hampshire) in 1709. The last private enclosure Act is for Terrington in Norfolk in {{last.year|raw}}, and the last local enclosure Act is for Gedney in Lincolnshire in {{last.local_year|raw}}; later enclosures went through the Inclosure Commissioners. {{multi.n_multi|int}} Acts ({{multi.multi_pct|int}}\%) name more than one place; the longest list is the {{biggest.year|raw}} Act naming {{biggest.n_places|int}} places around Shenstone in Staffordshire. {{twice.n|int}} gazetteer places are named in enclosure Acts of two or more different years and {{twice.three|int}} in three or more (Figure~\ref{fig:twice}); Elsdon, Simonburn and Rothbury in Northumberland, Chatteris in Cambridgeshire and Lanchester in Durham appear in four. The longest interval is at Eccleshall in Staffordshire, between Acts of 1719 and 1841.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_twice.png}
+\caption{Places named in several enclosure Acts: the most repeated and the longest gaps.}\label{fig:twice}\end{figure}
+
+\section{Discussion}
+The pattern is the familiar one from the county studies, recovered here from a single open source: a Midland belt of open-field parishes enclosed mainly in the first wave, and a second wave in the French wars that reached further south, east and west, into Norfolk and Suffolk, the south-west, the home counties and Wales. The interpretation of that pattern is not settled by counting Acts. Enclosure allowed consolidation, drainage and new rotations, and studies have found that output and rents rose where it occurred \citep{chambers1966,turner1980}; Allen argued that the productivity gains were modest and that most of the extra income went to landowners as rent \citep{allen1992}. Enclosure also extinguished common rights of grazing, fuel and gleaning that mattered to cottagers and labourers, many of whom received little or nothing in the allotment \citep{hammond1911,neeson1993}. Both effects are consistent with the map: the same Acts that fenced fields for higher output fenced commons that the poor had used.
+
+\section{Limitations}
+First, this is a count of Acts as two chronological tables list them, not a count of enclosures. The total commonly quoted for England, more than 5,000 Acts, draws on Tate's and Turner's work and also includes public local Acts and enclosures completed after 1845 by the Inclosure Commissioners, confirmed by general Acts that the tables do not itemise; enclosure by agreement without an Act does not appear. Second, two pages of the local table are missing, so local Acts for 1802 to 1803 and for 1841 are not counted. Third, titles are classified by rule; a few borderline titles may be misclassed, and {{source.allotment_only|int}} allotment titles are excluded. Fourth, {{geo.rate|int}}\% of named places were located; local Acts ({{geo.local.rate|int}}\%) and Welsh places ({{geo.wales_rate|int}}\%) match less well, so their weight on the maps is understated. Fifth, county areas come from rebuilt boundaries. Sixth, an Act counts once whatever its acreage, so a small Act for one common weighs as much as one that enclosed a whole parish.
+
+\section{Conclusion}
+The Chronological Tables provide a free, reproducible way to map parliamentary enclosure in England and Wales. They show two waves, the second larger and wider than the first, a Midland heartland, and a late and partial reach into the south-west and Wales. Combining the private and local tables is essential: on its own the private table hides half of the war-years boom.
+
+\section*{Data and code availability}
+The interactive map is at \url{{{meta.page}}}. Data and code are at \url{{{meta.repo}}} and archived with this paper at \url{https://doi.org/{{meta.doi}}}. Derived data and text are released under CC BY 4.0 and code under the MIT licence. The chronological tables are Crown copyright, used under the Open Government Licence v3.0; Wikidata is CC0.
+
+\section*{AI statement}
+I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.
+
+\begin{thebibliography}{9}
+\bibitem[Allen(1992)]{allen1992} Allen, R. C. (1992) \textit{Enclosure and the Yeoman: The Agricultural Development of the South Midlands, 1450 to 1850}. Oxford: Clarendon Press.
+\bibitem[Chambers and Mingay(1966)]{chambers1966} Chambers, J. D. and Mingay, G. E. (1966) \textit{The Agricultural Revolution 1750 to 1880}. London: Batsford.
+\bibitem[Hammond and Hammond(1911)]{hammond1911} Hammond, J. L. and Hammond, B. (1911) \textit{The Village Labourer 1760 to 1832}. London: Longmans, Green.
+\bibitem[legislation.gov.uk(2026a)]{legpriv} legislation.gov.uk (2026) Chronological Table of Private and Personal Acts. Crown copyright, Open Government Licence v3.0. \url{https://www.legislation.gov.uk/changes/chron-tables/private}
+\bibitem[legislation.gov.uk(2026b)]{legloc} legislation.gov.uk (2026) Chronological Table of Local Acts. Crown copyright, Open Government Licence v3.0. \url{https://www.legislation.gov.uk/changes/chron-tables/local}
+\bibitem[Neeson(1993)]{neeson1993} Neeson, J. M. (1993) \textit{Commoners: Common Right, Enclosure and Social Change in England, 1700 to 1820}. Cambridge: Cambridge University Press.
+\bibitem[Tate(1978)]{tate1978} Tate, W. E. (1978) \textit{A Domesday of English Enclosure Acts and Awards}, ed. M. E. Turner. Reading: University of Reading.
+\bibitem[Turner(1980)]{turner1980} Turner, M. (1980) \textit{English Parliamentary Enclosure: Its Historical Geography and Economic History}. Folkestone: Dawson.
+\bibitem[Wikidata(2026)]{wikidata} Wikidata contributors (2026) Places in the United Kingdom with coordinates and historic county (P7959). CC0. \url{https://www.wikidata.org/}
+\end{thebibliography}
+\end{document}
