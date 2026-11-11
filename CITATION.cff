@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this data or code, please cite it as below."
+title: "Fencing the Commons: Mapping Parliamentary Enclosure in England and Wales from the Chronological Tables of Private and Local Acts"
+type: dataset
+authors:
+  - family-names: Hotham
+    given-names: Tristan
+    orcid: "https://orcid.org/0000-0003-4931-9349"
+    affiliation: "Independent researcher"
+doi: "10.5281/zenodo.23873003"
+url: "https://maps.tristanhotham.com/enclosure/"
+repository-code: "https://github.com/Tristan-Hotham/enclosure"
+license: CC-BY-4.0
+keywords:
+  - "enclosure"
+  - "inclosure Acts"
+  - "parliamentary enclosure"
+  - "open fields"
+  - "common rights"
+  - "agrarian history"
+  - "England"
+  - "Wales"
+  - "historical GIS"
+  - "open data"
+  - "maps"
